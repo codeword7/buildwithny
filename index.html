@@ -43,13 +43,6 @@
   <a href="#contact" class="py-2">Contact</a>
 </div>
 
-<script>
-  document.getElementById('menuBtn').onclick = () => {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('hidden');
-  };
-</script>
-
 <!-- HERO -->
 <section class="px-6 py-20 max-w-4xl mx-auto text-center">
   <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
@@ -176,6 +169,36 @@
 
   </div>
 </section>
+    <!-- FREE LAUNCH KIT SECTION -->
+    <section id="launch-kit" class="px-6 py-20 max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        Free 7-Day Founder Launch Kit
+    </h2>
+
+    <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-8">
+        A battle-tested checklist + landing page template to help founders launch in 
+        <span class="text-white font-semibold">7 days</span>.  
+        No email. No automation.  
+        Just DM me on Twitter and I’ll send it personally.
+    </p>
+
+    <div class="text-white/70 text-base md:text-lg mb-10 space-y-2">
+        <p>🚀 7-day founder launch roadmap</p>
+        <p>📄 High-conversion landing page template</p>
+        <p>⚡ Clear signals to know if you should build, pivot, or drop</p>
+    </div>
+
+    <button
+        id="openLaunchKitModal"
+        class="inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl mt-4"
+    >
+        Get the Free Launch Kit
+    </button>
+
+    <p class="mt-4 text-sm text-white/50">
+        No email required — DM me “Launch Kit”.
+    </p>
+    </section>
 
 <!-- CTA -->
 <section class="px-6 py-20 max-w-4xl mx-auto text-center">
@@ -204,6 +227,85 @@
     Insta: <a class="text-orange-400 font-semibold" href="https://instagram.com/buildwithny_">@buildwithny_</a><br>
   </p>
 </section>
+<!-- LAUNCH KIT MODAL -->
+<div
+  id="launchKitModal"
+  class="fixed inset-0 bg-black/80 flex items-center justify-center px-4 z-50 hidden"
+>
+  <div class="bg-zinc-900 border border-white/10 rounded-2xl max-w-md w-full p-6 relative">
 
+    <!-- Close button -->
+    <button
+      id="closeLaunchKitModal"
+      class="absolute top-3 right-3 text-white/60 hover:text-white text-2xl leading-none"
+      aria-label="Close"
+    >
+      &times;
+    </button>
+
+    <h3 class="text-2xl font-bold mb-3">Get the 7-Day Founder Launch Kit</h3>
+
+    <p class="text-white/70 text-base mb-4 leading-relaxed">
+      I send the kit manually over Twitter/X DMs so I can understand what you're building.
+      No forms, no automation, no email collection.
+    </p>
+
+    <ol class="text-white/70 text-sm md:text-base mb-4 list-decimal list-inside space-y-1 text-left">
+      <li>Open my profile: <span class="text-orange-400">@buildwithny</span></li>
+      <li>DM me the message: <b class="text-orange-400">“Launch Kit”</b></li>
+      <li>I reply personally with the PDF + template</li>
+    </ol>
+
+    <a
+      href="https://twitter.com/buildwithny"
+      target="_blank"
+      class="block bg-orange-500 hover:bg-orange-600 text-black text-center font-semibold px-6 py-3 rounded-xl mb-4"
+    >
+      DM me “Launch Kit” on X
+    </a>
+
+    <p class="text-xs text-white/50 text-left leading-relaxed">
+      This helps me engage with early users personally and understand what you're building.
+    </p>
+  </div>
+</div>
+    <!-- Mobile menu toggle script -->
+    <script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.onclick = () => {
+      mobileMenu.classList.toggle('hidden');
+    };
+  }
+
+  // Launch Kit Modal
+  const openLaunchKitBtn = document.getElementById('openLaunchKitModal');
+  const closeLaunchKitBtn = document.getElementById('closeLaunchKitModal');
+  const launchKitModal = document.getElementById('launchKitModal');
+
+  if (openLaunchKitBtn && closeLaunchKitBtn && launchKitModal) {
+    openLaunchKitBtn.addEventListener('click', () => {
+      launchKitModal.classList.remove('hidden');
+    });
+
+    closeLaunchKitBtn.addEventListener('click', () => {
+      launchKitModal.classList.add('hidden');
+    });
+
+    launchKitModal.addEventListener('click', (e) => {
+      if (e.target === launchKitModal) {
+        launchKitModal.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        launchKitModal.classList.add('hidden');
+      }
+    });
+  }
+</script>
 </body>
 </html>
