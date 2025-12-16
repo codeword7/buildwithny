@@ -1,486 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>BuildWithNY – MVPs & Creator Products That Actually Ship</title>
-    <meta
-      name="description"
-      content="BuildWithNY – I design, build and launch high-converting MVPs and creator funnels fast. Work with a full-stack founder, not an agency."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Simple inline SVG favicon with NY -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BuildWithNY — MVPs, Landing Pages & Creator Systems</title>
+  <!-- Simple inline SVG favicon with NY -->
     <link rel="icon" type="image/svg+xml"
         href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="20" ry="20" fill="%23000000"/%3E%3Ctext x="50" y="58" text-anchor="middle" font-size="42" fill="%23ffffff" font-family="Arial, sans-serif"%3ENY%3C/text%3E%3C/svg%3E' />
-
-    <!-- Privacy-friendly analytics by Plausible -->
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+   <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://plausible.io/js/pa-EL88sVP89ec9nOxFQlB1N.js"></script>
     <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
     </script>
+</head>
 
-    <!-- Base Tailwind config (optional, tweak if you want) -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["system-ui", "ui-sans-serif", "system-ui", "sans-serif"],
-            },
-            colors: {
-              brand: {
-                50: "#eff6ff",
-                100: "#dbeafe",
-                200: "#bfdbfe",
-                500: "#3b82f6",
-                600: "#2563eb",
-                700: "#1d4ed8",
-                900: "#0b1120",
-              },
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body class="bg-slate-950 text-slate-100 font-sans">
-    <!-- Page wrapper -->
-    <div class="min-h-screen flex flex-col">
-      <!-- NAVBAR -->
-      <header class="border-b border-slate-800/60 bg-slate-950/80 backdrop-blur">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div
-              class="h-9 w-9 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-xs font-bold tracking-tight"
-            >
-              NY
-            </div>
-            <div>
-              <div class="text-sm font-semibold tracking-tight">BuildWithNY</div>
-              <div class="text-[11px] text-slate-400">
-                Founder-first product & MVP studio
-              </div>
-            </div>
-          </div>
+<body class="bg-black text-white">
 
-          <nav class="hidden sm:flex items-center gap-6 text-xs text-slate-300">
-            <a href="#packages" class="hover:text-brand-200 transition">Packages</a>
-            <a href="#process" class="hover:text-brand-200 transition">Process</a>
-            <a href="#contact" class="hover:text-brand-200 transition">Work with me</a>
-          </nav>
-        </div>
-      </header>
+<!-- NAV -->
+<nav class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+  <h1 class="text-2xl font-bold">BuildWithNY</h1>
 
-      <!-- MAIN -->
-      <main class="flex-1">
-        <!-- HERO -->
-        <section class="border-b border-slate-900 bg-gradient-to-b from-slate-950 to-slate-950">
-          <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-            <div>
-              <p class="text-xs uppercase tracking-[0.2em] text-brand-200 mb-3">
-                buildwithny · mvp & creator systems
-              </p>
-              <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4">
-                I build MVPs, funnels & creator products<br class="hidden md:block" />
-                that are designed to <span class="text-brand-400">ship fast and sell</span>.
-              </h1>
-              <p class="text-sm md:text-[15px] text-slate-300 leading-relaxed mb-6">
-                I’m NY – a full-stack founder & engineer. I don’t just “design a landing page”
-                or “write some code”. I help you go from idea → MVP → paying users with
-                clean UX, fast tech and clear offers your audience understands.
-              </p>
+  <!-- Desktop menu -->
+  <div class="hidden md:flex gap-8 text-lg">
+    <a href="#services" class="hover:text-orange-400">Services</a>
+    <a href="#pricing" class="hover:text-orange-400">Pricing</a>
+    <a href="#work" class="hover:text-orange-400">Work</a>
+    <a href="#contact" class="hover:text-orange-400">Contact</a>
+  </div>
 
-              <ul class="text-xs text-slate-300 space-y-1 mb-6">
-                <li>• Solo founders & small teams who want to launch in weeks, not months.</li>
-                <li>• Creators who want a productized service, SaaS, or digital product.</li>
-                <li>• Agencies who need a technical brain to ship MVPs for their clients.</li>
-              </ul>
+  <!-- Mobile hamburger -->
+  <button id="menuBtn" class="md:hidden text-3xl">&#9776;</button>
+</nav>
 
-              <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
-                <a
-                  href="#contact"
-                  class="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-xs font-semibold shadow-lg shadow-brand-500/25 transition"
-                >
-                  DM me to start a project
-                </a>
-                <button
-                  class="text-xs text-slate-300 hover:text-brand-200 underline underline-offset-4 text-left"
-                  onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})"
-                >
-                  View packages & pricing ↓
-                </button>
-              </div>
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="hidden md:hidden flex-col bg-black border-b border-white/10 px-6 py-4 text-lg">
+  <a href="#services" class="py-2 border-b border-white/10">Services</a>
+  <a href="#pricing" class="py-2 border-b border-white/10">Pricing</a>
+  <a href="#work" class="py-2 border-b border-white/10">Work</a>
+  <a href="#contact" class="py-2">Contact</a>
+</div>
 
-              <div class="mt-5 flex flex-wrap gap-4 text-[11px] text-slate-400">
-                <span class="px-2 py-1 rounded-full border border-slate-800 bg-slate-900/60">
-                  Next.js · Tailwind · Node · AWS
-                </span>
-                <span class="px-2 py-1 rounded-full border border-slate-800 bg-slate-900/60">
-                  Landing pages · MVPs · SaaS skeletons
-                </span>
-                <span class="px-2 py-1 rounded-full border border-slate-800 bg-slate-900/60">
-                  Funnels · Creator products
-                </span>
-              </div>
-            </div>
+<script>
+  document.getElementById('menuBtn').onclick = () => {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+  };
+</script>
 
-            <!-- RIGHT: quick snapshot -->
-            <div class="space-y-4">
-              <div
-                class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4 flex flex-col gap-3 text-xs text-slate-200"
-              >
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] uppercase tracking-[0.15em] text-slate-400">
-                    what you get working with me
-                  </span>
-                  <span class="inline-flex items-center gap-1 text-[11px] text-brand-200">
-                    1:1 founder attention
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  </span>
-                </div>
+<!-- HERO -->
+<section class="px-6 py-20 max-w-4xl mx-auto text-center">
+  <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+    Ship Fast. Validate Faster.<br />
+    <span class="text-orange-400">I Build What Founders Imagine.</span>
+  </h1>
 
-                <ul class="space-y-2 text-[12px] text-slate-200">
-                  <li>• Clear positioning & offer (not just code).</li>
-                  <li>• Conversion-first landing page + simple funnel.</li>
-                  <li>• Tech stack that’s easy to extend when you grow.</li>
-                  <li>• Direct async updates via DM (no bloated meetings).</li>
-                </ul>
+  <p class="mt-6 text-xl text-white/70 leading-relaxed">
+    Most founders waste **months** searching for designers, developers, agencies…  
+    and still don’t get a working product.  
+    <br><br>
+    You don’t need an agency.  
+    You need a **builder** who understands founders, speed, and execution.
+  </p>
 
-                <div class="text-[11px] text-slate-400">
-                  No agency layers. You talk directly to the person actually designing & building your product.
-                </div>
-              </div>
+  <a href="#pricing" class="mt-8 inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl">
+    See Packages
+  </a>
+</section>
 
-              <div class="grid grid-cols-3 gap-3 text-[11px]">
-                <div class="rounded-xl border border-slate-800 bg-slate-950/80 p-3">
-                  <div class="text-slate-400 mb-1">MVPs shipped</div>
-                  <div class="text-lg font-semibold text-slate-50">10+*</div>
-                  <div class="text-[10px] text-slate-500">*Across my own products & client work</div>
-                </div>
-                <div class="rounded-xl border border-slate-800 bg-slate-950/80 p-3">
-                  <div class="text-slate-400 mb-1">Stack</div>
-                  <div class="text-xs font-semibold text-slate-50">
-                    Next.js · Tailwind<br />Node · AWS · Stripe
-                  </div>
-                </div>
-                <div class="rounded-xl border border-slate-800 bg-slate-950/80 p-3">
-                  <div class="text-slate-400 mb-1">Focus</div>
-                  <div class="text-xs font-semibold text-slate-50">
-                    Creators<br />SaaS · Agencies
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+<!-- PROBLEMS FOUNDERS FACE -->
+<section class="px-6 py-16 max-w-5xl mx-auto">
+  <h2 class="text-3xl font-bold mb-8 text-center">Founders Come to Me When They’re Stuck</h2>
 
-        <!-- Packages -->
-<section id="packages" class="border-b border-slate-800 bg-slate-950">
-  <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 space-y-8">
-    
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
-          Packages & Pricing
-        </h2>
-        <p class="text-sm md:text-base text-slate-300 max-w-2xl">
-          Simple, transparent pricing in USD for founders, creators and agencies worldwide.
-        </p>
-      </div>
-      <p class="text-xs md:text-sm text-slate-400 max-w-xs">
-        Payment: 100% upfront for landing pages,  
-        70/30 split for MVPs.  
-      </p>
+  <div class="grid md:grid-cols-3 gap-8 text-white/80 text-lg leading-relaxed">
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-xl font-semibold text-orange-400 mb-2">“My ideas never turn into something real.”</h3>
+      You’ve tried freelancers and agencies. They overcharge, oversell, and under-ship.  
+      I convert ideas into working products quickly.
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-xl font-semibold text-orange-400 mb-2">“I don’t know where to start.”</h3>
+      You don’t need a full product.  
+      You need the **first version** that gets users, feedback, and momentum.
+    </div>
 
-      <!-- Package 1 -->
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 flex flex-col">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="font-semibold text-lg">Launch Landing</h3>
-          <span class="text-xs px-2 py-1 rounded-full bg-slate-800 text-slate-300">
-            Starter
-          </span>
-        </div>
-
-        <p class="text-2xl font-semibold">$499</p>
-        <p class="text-xs text-slate-400 mb-4">One-time · 7–10 days</p>
-
-        <p class="text-sm text-slate-300 mb-4">
-          A clean, fast landing page to validate your idea or present your offer.
-        </p>
-
-        <ul class="text-xs text-slate-300 space-y-1.5 mb-6">
-          <li>• High-converting sections</li>
-          <li>• Copy framework</li>
-          <li>• Basic SEO + analytics</li>
-          <li>• Domain + hosting setup</li>
-        </ul>
-
-        <div class="mt-auto">
-          <a href="#contact" class="block text-center text-sm font-semibold px-4 py-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-white">
-            DM Me About This
-          </a>
-        </div>
-      </div>
-
-      <!-- Package 2 -->
-      <div class="bg-slate-900 border border-cyan-500/70 rounded-2xl p-6 flex flex-col relative overflow-hidden">
-        <div class="absolute inset-x-0 -top-24 h-32 bg-cyan-500/10 blur-3xl pointer-events-none"></div>
-
-        <div class="flex items-center justify-between mb-4 relative">
-          <h3 class="font-semibold text-lg">MVP Sprint</h3>
-          <span class="text-xs px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/40">
-            Most Popular
-          </span>
-        </div>
-
-        <p class="text-2xl font-semibold">$1,999 – $3,500</p>
-        <p class="text-xs text-slate-400 mb-4">3–6 weeks · depending on scope</p>
-
-        <p class="text-sm text-slate-300 mb-4">
-          A functional MVP web application + landing page built for real users.
-        </p>
-
-        <ul class="text-xs text-slate-300 space-y-1.5 mb-6">
-          <li>• Landing page included</li>
-          <li>• Dashboard + core features</li>
-          <li>• Auth + database + integrations</li>
-          <li>• Stripe-ready structure</li>
-          <li>• 2-week post-launch support</li>
-        </ul>
-
-        <div class="mt-auto">
-          <a href="#contact" class="block text-center text-sm font-semibold px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 shadow-md shadow-cyan-500/30">
-            DM “MVP Sprint”
-          </a>
-        </div>
-      </div>
-
-      <!-- Package 3 -->
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 flex flex-col">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="font-semibold text-lg">Creator Engine</h3>
-          <span class="text-xs px-2 py-1 rounded-full bg-slate-800 text-slate-300">
-            For Creators
-          </span>
-        </div>
-
-        <p class="text-2xl font-semibold">$999 – $1,499</p>
-        <p class="text-xs text-slate-400 mb-4">2–4 weeks</p>
-
-        <p class="text-sm text-slate-300 mb-4">
-          A personal site + offers page + social setup designed to convert followers into buyers.
-        </p>
-
-        <ul class="text-xs text-slate-300 space-y-1.5 mb-6">
-          <li>• Personal website</li>
-          <li>• Offers/services page</li>
-          <li>• Booking or funnel setup</li>
-          <li>• Social profile optimization</li>
-        </ul>
-
-        <div class="mt-auto">
-          <a href="#contact" class="block text-center text-sm font-semibold px-4 py-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-white">
-            DM Me to Begin
-          </a>
-        </div>
-      </div>
-
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-xl font-semibold text-orange-400 mb-2">“I wasted money & time already.”</h3>
+      I make the process simple:  
+      Clear scope, clear timeline, clear deliverables — no dragging.
     </div>
   </div>
 </section>
 
+<!-- SERVICES -->
+<section id="services" class="px-6 py-20 max-w-5xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-12">What I Build For You</h2>
 
-        <!-- PROCESS -->
-        <section id="process" class="border-b border-slate-900 bg-slate-950">
-          <div class="max-w-6xl mx-auto px-4 py-10 md:py-14">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-              <div>
-                <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-1">
-                  How working together actually feels
-                </h2>
-                <p class="text-sm text-slate-300">
-                  Fast, direct and focused on outcomes. No corporate nonsense.
-                </p>
-              </div>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-4 text-xs">
-              <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div class="text-[11px] text-slate-400 mb-1">Step 1</div>
-                <div class="font-semibold mb-1">DM with context</div>
-                <p class="text-slate-300 mb-2">
-                  You message me on X/Instagram with what you’re trying to build, your audience, and your timeline.
-                </p>
-                <p class="text-[11px] text-slate-500">
-                  If it looks like a fit, I’ll ask a few focused questions to tighten the scope.
-                </p>
-              </div>
-
-              <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div class="text-[11px] text-slate-400 mb-1">Step 2</div>
-                <div class="font-semibold mb-1">Simple scope & price</div>
-                <p class="text-slate-300 mb-2">
-                  I send you a written scope (what we’re building, what’s not included) and a fixed price.
-                </p>
-                <p class="text-[11px] text-slate-500">
-                  No hourly confusion. If it’s a fit, we lock the slot with upfront payment.
-                </p>
-              </div>
-
-              <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div class="text-[11px] text-slate-400 mb-1">Step 3</div>
-                <div class="font-semibold mb-1">Build & iterate</div>
-                <p class="text-slate-300 mb-2">
-                  I design and build in tight loops, sharing progress with short Loom videos & messages.
-                </p>
-                <p class="text-[11px] text-slate-500">
-                  You give quick feedback so we don’t drift. The entire goal: ship something usable.
-                </p>
-              </div>
-
-              <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div class="text-[11px] text-slate-400 mb-1">Step 4</div>
-                <div class="font-semibold mb-1">Launch & next steps</div>
-                <p class="text-slate-300 mb-2">
-                  We go live on your domain, connect analytics, and I outline what you should build next.
-                </p>
-                <p class="text-[11px] text-slate-500">
-                  If we both want, we can keep working together on an ongoing basis.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Contact / CTA -->
-<section id="contact" class="border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-[1.1fr,0.9fr] gap-10">
-
-        <div class="space-y-4">
-            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
-                Ready to build? DM me.
-            </h2>
-
-            <p class="text-sm md:text-base text-slate-300">
-                No forms. No friction.
-                DM → Quick chat → Optional call → Stripe link → I build.
-            </p>
-
-            <p class="text-xs md:text-sm text-slate-400">
-                Fastest way to reach me is through X or Instagram.
-            </p>
-        </div>
-
-        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 text-sm space-y-4">
-
-            <div class="flex flex-col gap-3">
-                <a href="https://twitter.com/buildwithny" target="_blank"
-                    class="w-full px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-sm text-center">
-                    DM Me on X (Fastest)
-                </a>
-
-                <a href="https://instagram.com/buildwithny_" target="_blank"
-                    class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 hover:border-slate-500 text-slate-200 text-sm text-center">
-                    DM Me on Instagram
-                </a>
-            </div>
-
-            <p class="text-xs text-slate-500">
-                After DM → I ask a few questions → If we’re a fit, we start.
-            </p>
-
-        </div>
+  <div class="grid md:grid-cols-3 gap-10">
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-2xl font-semibold mb-3">Landing Pages</h3>
+      <p class="text-white/70 leading-relaxed">
+        Clean, fast, conversion-focused landing pages  
+        for founders validating ideas and collecting leads.
+      </p>
     </div>
+
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-2xl font-semibold mb-3">Creator Systems</h3>
+      <p class="text-white/70 leading-relaxed">
+        Automations + tools tailored for content creators  
+        who want to grow consistently without burnout.
+      </p>
+    </div>
+
+    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-2xl font-semibold mb-3">Starter MVPs</h3>
+      <p class="text-white/70 leading-relaxed">
+        Fully functional v1 products —  
+        fast enough to test, solid enough to scale.
+      </p>
+    </div>
+  </div>
 </section>
 
+<!-- PRICING -->
+<section id="pricing" class="px-6 py-20 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-12">Simple, Clear Pricing</h2>
 
-        <!-- FAQ -->
-        <section class="bg-slate-950">
-          <div class="max-w-4xl mx-auto px-4 py-10 md:py-14">
-            <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
-              Quick questions founders usually ask
-            </h2>
+  <div class="grid md:grid-cols-3 gap-10">
 
-            <div class="space-y-4 text-sm">
-              <details class="group rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-3">
-                <summary
-                  class="flex items-center justify-between cursor-pointer text-slate-200 text-[13px]"
-                >
-                  <span>Do you only work with founders from first-world countries?</span>
-                  <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
-                </summary>
-                <div class="mt-2 text-[12px] text-slate-300">
-                  I’m based in India (moving to Bangalore), but I aim my work at founders & creators in mature markets
-                  (US, UK, EU, etc.). If you’re serious about building and can pay online via Stripe, geography isn’t an issue.
-                </div>
-              </details>
+    <!-- $500 -->
+    <div class="p-8 bg-white/5 rounded-xl border border-white/10">
+      <h3 class="text-3xl font-bold text-orange-400 mb-4">$500</h3>
+      <h4 class="text-xl font-semibold mb-4">Landing Page Package</h4>
 
-              <details class="group rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-3">
-                <summary
-                  class="flex items-center justify-between cursor-pointer text-slate-200 text-[13px]"
-                >
-                  <span>How do payments work?</span>
-                  <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
-                </summary>
-                <div class="mt-2 text-[12px] text-slate-300">
-                  Once we agree on scope & price in DM, I send you a Stripe link. For bigger projects we can split it
-                  (e.g. 70% upfront, 30% on launch). No surprise add-ons in the middle.
-                </div>
-              </details>
-
-              <details class="group rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-3">
-                <summary
-                  class="flex items-center justify-between cursor-pointer text-slate-200 text-[13px]"
-                >
-                  <span>Will you support my product after launch?</span>
-                  <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
-                </summary>
-                <div class="mt-2 text-[12px] text-slate-300">
-                  Yes, we can add a small monthly maintenance / improvement plan or move you to the Founder Suite retainer.
-                  I prefer long-term relationships with people who actually execute.
-                </div>
-              </details>
-
-              <details class="group rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-3">
-                <summary
-                  class="flex items-center justify-between cursor-pointer text-slate-200 text-[13px]"
-                >
-                  <span>What if I’m not ready for a full MVP yet?</span>
-                  <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
-                </summary>
-                <div class="mt-2 text-[12px] text-slate-300">
-                  Start with the Landing Page & Offer Clarity package and use it to test interest. Once you see traction
-                  from content or ads, we can upgrade to an MVP sprint.
-                </div>
-              </details>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- FOOTER -->
-      <footer class="border-t border-slate-900 bg-slate-950/95">
-        <div
-          class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-[11px] text-slate-500"
-        >
-          <div>© <span id="year"></span> BuildWithNY · Neeraj. All rights reserved.</div>
-          <div class="flex flex-wrap gap-3">
-            <span>Made in India · Built in public.</span>
-          </div>
-        </div>
-      </footer>
+      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
+        <li>✓ Conversion-focused landing page</li>
+        <li>✓ Designed for idea validation</li>
+        <li>✓ Fast tech stack (Next.js + Tailwind)</li>
+        <li>✓ Mobile optimized</li>
+        <li>✓ Delivered in 7–10 days</li>
+      </ul>
     </div>
 
-    <script>
-      // set year automatically
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-  </body>
+    <!-- $1000 -->
+    <div class="p-8 bg-white/5 rounded-xl border border-orange-400/40">
+      <h3 class="text-3xl font-bold text-orange-400 mb-4">$1000</h3>
+      <h4 class="text-xl font-semibold mb-4">Creator Engine Setup</h4>
+
+      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
+        <li>✓ A complete system for creators</li>
+        <li>✓ Content workflow automation</li>
+        <li>✓ Social scheduling tools</li>
+        <li>✓ Landing + lead magnet</li>
+        <li>✓ Delivered in 2 weeks</li>
+      </ul>
+    </div>
+
+    <!-- $1500 -->
+    <div class="p-8 bg-white/5 rounded-xl border border-orange-400/40">
+      <h3 class="text-3xl font-bold text-orange-400 mb-4">$1500</h3>
+      <h4 class="text-xl font-semibold mb-4">Starter MVP Build</h4>
+
+      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
+        <li>✓ Full MVP v1 design + development</li>
+        <li>✓ User auth, dashboard, core features</li>
+        <li>✓ Optimized for early user testing</li>
+        <li>✓ Clean, scalable code</li>
+        <li>✓ Delivered in 3–4 weeks</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="px-6 py-20 max-w-4xl mx-auto text-center">
+  <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+    Ready to Build?  
+    <span class="text-orange-400">Let’s create your first version.</span>
+  </h2>
+
+  <p class="mt-6 text-xl text-white/70 leading-relaxed">
+    Whether it's a landing page, creator setup, or MVP —  
+    the goal is the same: **ship fast and validate faster.**
+  </p>
+
+  <a href="#contact" class="mt-8 inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl">
+    Contact Me
+  </a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="px-6 py-20 max-w-4xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+  <p class="text-white/70 text-lg mb-6">DM me on social.</p>
+
+  <p class="text-xl">
+    Twitter: <a class="text-orange-400 font-semibold" href="https://twitter.com/buildwithny">@buildwithny</a><br>
+    Insta: <a class="text-orange-400 font-semibold" href="https://instagram.com/buildwithny_">@buildwithny_</a><br>
+  </p>
+</section>
+
+</body>
 </html>
