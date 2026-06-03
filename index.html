@@ -2,310 +2,877 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BuildWithNY — MVPs, Landing Pages & Creator Systems</title>
-  <!-- Simple inline SVG favicon with NY -->
-    <link rel="icon" type="image/svg+xml"
-        href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="20" ry="20" fill="%23000000"/%3E%3Ctext x="50" y="58" text-anchor="middle" font-size="42" fill="%23ffffff" font-family="Arial, sans-serif"%3ENY%3C/text%3E%3C/svg%3E' />
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-   <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://plausible.io/js/pa-EL88sVP89ec9nOxFQlB1N.js"></script>
-    <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BuildWithNY — AI Workflows for Accounting Firms</title>
+  <meta name="description" content="We build AI-powered workflows for accounting firms. 2-week sprint. Fixed fee. Your team stays in control." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --blue: #1d4ed8;
+      --blue-light: #3b82f6;
+      --cream: #faf8f4;
+      --warm-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--blue); }
+
+    .nav-cta {
+      background: var(--navy);
+      color: white;
+      padding: 0.55rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--blue); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(29, 78, 216, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(29, 78, 216, 0.08);
+      border: 1px solid rgba(29, 78, 216, 0.2);
+      color: var(--blue);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      font-weight: 400;
+      margin-bottom: 2.8rem;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(29, 78, 216, 0.25);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--navy);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      border: 1.5px solid var(--border);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--navy);
+      background: white;
+    }
+
+    .hero-proof {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+
+    .proof-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .proof-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .proof-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PAIN SECTION ── */
+    .pain {
+      background: var(--navy);
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pain::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(29, 78, 216, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .pain-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .pain .section-label { color: var(--blue-light); }
+
+    .pain h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: white;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      max-width: 640px;
+    }
+
+    .pain-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin-bottom: 3.5rem;
+      line-height: 1.7;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pain-card {
+      background: rgba(15, 31, 61, 0.85);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .pain-card:hover { background: rgba(29, 78, 216, 0.12); }
+
+    .pain-icon {
+      width: 40px; height: 40px;
+      background: rgba(29, 78, 216, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.2rem;
+    }
+
+    .pain-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .pain-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 7rem 2rem;
+      background: white;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .how .section-label { color: var(--blue); }
+
+    .how h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    .how-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 4rem;
+      max-width: 500px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .step {
+      position: relative;
+      padding: 2rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--cream);
+      transition: all 0.2s;
+    }
+
+    .step:hover {
+      border-color: var(--blue-light);
+      box-shadow: 0 4px 20px rgba(29, 78, 216, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3rem;
+      color: rgba(29, 78, 216, 0.12);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step-week {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(29, 78, 216, 0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .deliverables {
+      padding: 7rem 2rem;
+      background: var(--cream);
+    }
+
+    .deliverables-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .deliverables .section-label { color: var(--blue); }
+
+    .deliverables h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      line-height: 1.15;
+    }
+
+    .deliverables-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .check {
+      width: 20px; height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .check::after {
+      content: '✓';
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+
+    .pricing-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 2.8rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pricing-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-amount {
+      font-family: 'Instrument Serif', serif;
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-sub {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-breakdown {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .pricing-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .pricing-row span:first-child { color: rgba(255,255,255,0.6); }
+    .pricing-row span:last-child { color: white; font-weight: 500; }
+
+    .pricing-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .btn-white {
+      display: block;
+      background: white;
+      color: var(--navy);
+      text-align: center;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-white:hover {
+      background: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    /* ── NOT INCLUDED ── */
+    .not-included {
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .not-included p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: white;
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-section .section-label {
+      color: var(--blue);
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-section h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.12;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-contact {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .cta-contact a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cta-contact a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--blue-light); }
+
+    .footer-info {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+
+      .hero { padding: 6rem 1.2rem 3rem; }
+
+      .hero-proof {
+        gap: 1.5rem;
+      }
+
+      .pain { padding: 4rem 1.2rem; }
+      .how { padding: 4rem 1.2rem; }
+      .deliverables { padding: 4rem 1.2rem; }
+      .cta-section { padding: 4rem 1.2rem; }
+
+      .deliverables-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info { text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="bg-black text-white">
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Build<span>WithNY</span></a>
+    <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Free Call</a>
+  </nav>
 
-<!-- NAV -->
-<nav class="flex items-center justify-between px-6 py-4 border-b border-white/10">
-  <h1 class="text-2xl font-bold">BuildWithNY</h1>
-
-  <!-- Desktop menu -->
-  <div class="hidden md:flex gap-8 text-lg">
-    <a href="#services" class="hover:text-orange-400">Services</a>
-    <a href="#pricing" class="hover:text-orange-400">Pricing</a>
-    <a href="#work" class="hover:text-orange-400">Work</a>
-    <a href="#contact" class="hover:text-orange-400">Contact</a>
-  </div>
-
-  <!-- Mobile hamburger -->
-  <button id="menuBtn" class="md:hidden text-3xl">&#9776;</button>
-</nav>
-
-<!-- MOBILE MENU -->
-<div id="mobileMenu" class="hidden md:hidden flex-col bg-black border-b border-white/10 px-6 py-4 text-lg">
-  <a href="#services" class="py-2 border-b border-white/10">Services</a>
-  <a href="#pricing" class="py-2 border-b border-white/10">Pricing</a>
-  <a href="#work" class="py-2 border-b border-white/10">Work</a>
-  <a href="#contact" class="py-2">Contact</a>
-</div>
-
-<!-- HERO -->
-<section class="px-6 py-20 max-w-4xl mx-auto text-center">
-  <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-    Ship Fast. Validate Faster.<br />
-    <span class="text-orange-400">I Build What Founders Imagine.</span>
-  </h1>
-
-  <p class="mt-6 text-xl text-white/70 leading-relaxed">
-    Most founders waste **months** searching for designers, developers, agencies…  
-    and still don’t get a working product.  
-    <br><br>
-    You don’t need an agency.  
-    You need a **builder** who understands founders, speed, and execution.
-  </p>
-
-  <a href="#pricing" class="mt-8 inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl">
-    See Packages
-  </a>
-</section>
-
-<!-- PROBLEMS FOUNDERS FACE -->
-<section class="px-6 py-16 max-w-5xl mx-auto">
-  <h2 class="text-3xl font-bold mb-8 text-center">Founders Come to Me When They’re Stuck</h2>
-
-  <div class="grid md:grid-cols-3 gap-8 text-white/80 text-lg leading-relaxed">
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-xl font-semibold text-orange-400 mb-2">“My ideas never turn into something real.”</h3>
-      You’ve tried freelancers and agencies. They overcharge, oversell, and under-ship.  
-      I convert ideas into working products quickly.
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">AI Automation for Accounting Firms</div>
+      <h1>Stop losing hours<br/>to work that<br/><em>shouldn't be manual</em></h1>
+      <p class="hero-sub">We build AI-powered workflows for CPA and bookkeeping firms. Cut 10+ hours of manual work per week — with full audit trails and your team in control at every step.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="btn-primary">
+          Book a Free 15-Min Call →
+        </a>
+        <a href="#how" class="btn-secondary">See How It Works</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <span class="proof-num">2</span>
+          <span class="proof-label">Week delivery</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">$3,500</span>
+          <span class="proof-label">Fixed fee</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">10hrs+</span>
+          <span class="proof-label">Saved per week</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">100%</span>
+          <span class="proof-label">You own it</span>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-xl font-semibold text-orange-400 mb-2">“I don’t know where to start.”</h3>
-      You don’t need a full product.  
-      You need the **first version** that gets users, feedback, and momentum.
+  <!-- PAIN -->
+  <section class="pain">
+    <div class="pain-inner">
+      <div class="section-label">The Problem</div>
+      <h2>Your team is stuck doing work that AI can handle</h2>
+      <p class="pain-desc">Most accounting firms with 5–25 staff spend 10–15 hours a week on repetitive manual tasks. That's time not spent on clients, advisory work, or growth.</p>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">📋</div>
+          <h3>Coding Transactions</h3>
+          <p>Thousands of transactions monthly — each one manually reviewed, categorized, and entered. Every. Single. Month.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📧</div>
+          <h3>Chasing Client Documents</h3>
+          <p>Staff sending the same reminder emails over and over. Bank statements, receipts, payroll reports — all manual follow-up.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📅</div>
+          <h3>Month-End Close Chaos</h3>
+          <p>The last week of every month. Reconciliations, checks, reports. A repetitive checklist that your team runs from scratch every cycle.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🆕</div>
+          <h3>Client Onboarding</h3>
+          <p>Getting a new client set up takes 3–5 hours of manual back-and-forth. Collecting documents, setting up access, confirming everything.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-xl font-semibold text-orange-400 mb-2">“I wasted money & time already.”</h3>
-      I make the process simple:  
-      Clear scope, clear timeline, clear deliverables — no dragging.
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="how-inner">
+      <div class="section-label">How It Works</div>
+      <h2>Simple. Fast. Yours permanently.</h2>
+      <p class="how-desc">We handle the full build in two weeks. You own everything — no subscriptions, no lock-in, no ongoing fees.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Discovery Call</h3>
+          <p>15 minutes. We map your exact workflows, tools, and biggest pain points. No pitch — just diagnosis.</p>
+          <span class="step-week">Day 0</span>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Workflow Design</h3>
+          <p>We document your exact process and design the automation. You approve it before we build a single line.</p>
+          <span class="step-week">Day 1–3</span>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Build & Test</h3>
+          <p>We build in your environment — QBO or Xero — and test with your real data. Human approval at every AI step.</p>
+          <span class="step-week">Day 4–10</span>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Handover & Training</h3>
+          <p>Live walkthrough with your team. Full documentation. You own the system permanently — no ongoing fees.</p>
+          <span class="step-week">Day 14</span>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="services" class="px-6 py-20 max-w-5xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-12">What I Build For You</h2>
+  <!-- DELIVERABLES + PRICING -->
+  <section class="deliverables">
+    <div class="deliverables-inner">
+      <div class="deliverables-left">
+        <div class="section-label">What You Get</div>
+        <h2>Built for CPA firms.<br/>Not generic AI.</h2>
+        <p class="deliverables-desc">Everything is built specifically for your firm's workflows, your chart of accounts, your clients. Not a generic tool. A custom system your team actually uses.</p>
+        <ul class="checklist">
+          <li><span class="check"></span>AI transaction categorization — trained on your firm's data</li>
+          <li><span class="check"></span>Automated client document collection and reminders</li>
+          <li><span class="check"></span>Month-end close workflow automation</li>
+          <li><span class="check"></span>Full audit trail — every action logged and reviewable</li>
+          <li><span class="check"></span>Human approval layer — nothing posts without sign-off</li>
+          <li><span class="check"></span>Works with QuickBooks Online and Xero</li>
+          <li><span class="check"></span>Team training and full documentation</li>
+          <li><span class="check"></span>You own it permanently — no subscriptions</li>
+        </ul>
+      </div>
+      <div class="deliverables-right">
+        <div class="pricing-card">
+          <div class="pricing-label">2-Week Sprint</div>
+          <div class="pricing-amount">$3,500</div>
+          <div class="pricing-sub">Fixed fee. No surprises.</div>
+          <div class="pricing-breakdown">
+            <div class="pricing-row">
+              <span>50% deposit to begin</span>
+              <span>$1,750</span>
+            </div>
+            <div class="pricing-row">
+              <span>50% on Day 14 handover</span>
+              <span>$1,750</span>
+            </div>
+          </div>
+          <a href="https://buy.stripe.com/9B6fZig7q18Ze686VQ2B206" target="_blank" class="btn-white">
+            Pay Deposit & Get Started
+          </a>
+          <p class="pricing-note">Or book a call first — no pressure</p>
+          <div class="not-included">
+            <p>Includes: Full build, testing, training, documentation, and handover. Excludes: Third-party software licenses, ongoing maintenance (available as add-on).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="grid md:grid-cols-3 gap-10">
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-2xl font-semibold mb-3">Landing Pages</h3>
-      <p class="text-white/70 leading-relaxed">
-        Clean, fast, conversion-focused landing pages  
-        for founders validating ideas and collecting leads.
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label">Get Started</span>
+      <h2>Ready to get 10 hours back every week?</h2>
+      <p>Book a free 15-minute call. We'll look at your current workflows and tell you exactly what we'd automate — no pitch, just a straight answer.</p>
+      <div class="cta-buttons">
+        <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="btn-primary">
+          Book a Free 15-Min Call →
+        </a>
+        <a href="https://buy.stripe.com/9B6fZig7q18Ze686VQ2B206" target="_blank" class="btn-secondary">
+          Pay Deposit & Start Now
+        </a>
+      </div>
+      <p class="cta-contact">
+        Questions? Email us directly at <a href="mailto:admin@gobuildwithny.com">admin@gobuildwithny.com</a>
       </p>
     </div>
+  </section>
 
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-2xl font-semibold mb-3">Creator Systems</h3>
-      <p class="text-white/70 leading-relaxed">
-        Automations + tools tailored for content creators  
-        who want to grow consistently without burnout.
-      </p>
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Build<span>WithNY</span></a>
+    <div class="footer-info">
+      <div>PandaLabs LLC — Registered in the United States</div>
+      <div>© 2026 BuildWithNY. All rights reserved.</div>
     </div>
+  </footer>
 
-    <div class="p-6 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-2xl font-semibold mb-3">Starter MVPs</h3>
-      <p class="text-white/70 leading-relaxed">
-        Fully functional v1 products —  
-        fast enough to test, solid enough to scale.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="px-6 py-20 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-12">Simple, Clear Pricing</h2>
-
-  <div class="grid md:grid-cols-3 gap-10">
-
-    <!-- $500 -->
-    <div class="p-8 bg-white/5 rounded-xl border border-white/10">
-      <h3 class="text-3xl font-bold text-orange-400 mb-4">$500</h3>
-      <h4 class="text-xl font-semibold mb-4">Landing Page Package</h4>
-
-      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
-        <li>✓ Conversion-focused landing page</li>
-        <li>✓ Designed for idea validation</li>
-        <li>✓ Fast tech stack (Next.js + Tailwind)</li>
-        <li>✓ Mobile optimized</li>
-        <li>✓ Delivered in 7–10 days</li>
-      </ul>
-    </div>
-
-    <!-- $1000 -->
-    <div class="p-8 bg-white/5 rounded-xl border border-orange-400/40">
-      <h3 class="text-3xl font-bold text-orange-400 mb-4">$1000</h3>
-      <h4 class="text-xl font-semibold mb-4">Creator Engine Setup</h4>
-
-      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
-        <li>✓ A complete system for creators</li>
-        <li>✓ Content workflow automation</li>
-        <li>✓ Social scheduling tools</li>
-        <li>✓ Landing + lead magnet</li>
-        <li>✓ Delivered in 2 weeks</li>
-      </ul>
-    </div>
-
-    <!-- $1500 -->
-    <div class="p-8 bg-white/5 rounded-xl border border-orange-400/40">
-      <h3 class="text-3xl font-bold text-orange-400 mb-4">$1500</h3>
-      <h4 class="text-xl font-semibold mb-4">Starter MVP Build</h4>
-
-      <ul class="text-white/70 space-y-3 text-lg leading-relaxed">
-        <li>✓ Full MVP v1 design + development</li>
-        <li>✓ User auth, dashboard, core features</li>
-        <li>✓ Optimized for early user testing</li>
-        <li>✓ Clean, scalable code</li>
-        <li>✓ Delivered in 3–4 weeks</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-    <!-- FREE LAUNCH KIT SECTION -->
-    <section id="launch-kit" class="px-6 py-20 max-w-4xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">
-        Free 7-Day Founder Launch Kit
-    </h2>
-
-    <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-8">
-        A battle-tested checklist + landing page template to help founders launch in 
-        <span class="text-white font-semibold">7 days</span>.  
-        No email. No automation.  
-        Just DM me on Twitter and I’ll send it personally.
-    </p>
-
-    <div class="text-white/70 text-base md:text-lg mb-10 space-y-2">
-        <p>🚀 7-day founder launch roadmap</p>
-        <p>📄 High-conversion landing page template</p>
-        <p>⚡ Clear signals to know if you should build, pivot, or drop</p>
-    </div>
-
-    <button
-        id="openLaunchKitModal"
-        class="inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl mt-4"
-    >
-        Get the Free Launch Kit
-    </button>
-
-    <p class="mt-4 text-sm text-white/50">
-        No email required — DM me “Launch Kit”.
-    </p>
-    </section>
-
-<!-- CTA -->
-<section class="px-6 py-20 max-w-4xl mx-auto text-center">
-  <h2 class="text-3xl md:text-4xl font-bold leading-tight">
-    Ready to Build?  
-    <span class="text-orange-400">Let’s create your first version.</span>
-  </h2>
-
-  <p class="mt-6 text-xl text-white/70 leading-relaxed">
-    Whether it's a landing page, creator setup, or MVP —  
-    the goal is the same: **ship fast and validate faster.**
-  </p>
-
-  <a href="#contact" class="mt-8 inline-block bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-xl">
-    Contact Me
-  </a>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="px-6 py-20 max-w-4xl mx-auto text-center">
-  <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
-  <p class="text-white/70 text-lg mb-6">DM me on social.</p>
-
-  <p class="text-xl">
-    Twitter: <a class="text-orange-400 font-semibold" href="https://twitter.com/buildwithny">@buildwithny</a><br>
-    Insta: <a class="text-orange-400 font-semibold" href="https://instagram.com/buildwithny_">@buildwithny_</a><br>
-  </p>
-</section>
-<!-- LAUNCH KIT MODAL -->
-<div
-  id="launchKitModal"
-  class="fixed inset-0 bg-black/80 flex items-center justify-center px-4 z-50 hidden"
->
-  <div class="bg-zinc-900 border border-white/10 rounded-2xl max-w-md w-full p-6 relative">
-
-    <!-- Close button -->
-    <button
-      id="closeLaunchKitModal"
-      class="absolute top-3 right-3 text-white/60 hover:text-white text-2xl leading-none"
-      aria-label="Close"
-    >
-      &times;
-    </button>
-
-    <h3 class="text-2xl font-bold mb-3">Get the 7-Day Founder Launch Kit</h3>
-
-    <p class="text-white/70 text-base mb-4 leading-relaxed">
-      I send the kit manually over Twitter/X DMs so I can understand what you're building.
-      No forms, no automation, no email collection.
-    </p>
-
-    <ol class="text-white/70 text-sm md:text-base mb-4 list-decimal list-inside space-y-1 text-left">
-      <li>Open my profile: <span class="text-orange-400">@buildwithny</span></li>
-      <li>DM me the message: <b class="text-orange-400">“Launch Kit”</b></li>
-      <li>I reply personally with the PDF + template</li>
-    </ol>
-
-    <a
-      href="https://twitter.com/buildwithny"
-      target="_blank"
-      class="block bg-orange-500 hover:bg-orange-600 text-black text-center font-semibold px-6 py-3 rounded-xl mb-4"
-    >
-      DM me “Launch Kit” on X
-    </a>
-
-    <p class="text-xs text-white/50 text-left leading-relaxed">
-      This helps me engage with early users personally and understand what you're building.
-    </p>
-  </div>
-</div>
-    <!-- Mobile menu toggle script -->
-    <script>
-  // Mobile menu
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (menuBtn && mobileMenu) {
-    menuBtn.onclick = () => {
-      mobileMenu.classList.toggle('hidden');
-    };
-  }
-
-  // Launch Kit Modal
-  const openLaunchKitBtn = document.getElementById('openLaunchKitModal');
-  const closeLaunchKitBtn = document.getElementById('closeLaunchKitModal');
-  const launchKitModal = document.getElementById('launchKitModal');
-
-  if (openLaunchKitBtn && closeLaunchKitBtn && launchKitModal) {
-    openLaunchKitBtn.addEventListener('click', () => {
-      launchKitModal.classList.remove('hidden');
-    });
-
-    closeLaunchKitBtn.addEventListener('click', () => {
-      launchKitModal.classList.add('hidden');
-    });
-
-    launchKitModal.addEventListener('click', (e) => {
-      if (e.target === launchKitModal) {
-        launchKitModal.classList.add('hidden');
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        launchKitModal.classList.add('hidden');
-      }
-    });
-  }
-</script>
 </body>
 </html>
