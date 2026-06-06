@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Automation Audit — BuildWithNY</title>
+  <meta name="description" content="Find out exactly how much manual work is costing your accounting firm. Free 3-minute audit." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- jsPDF for report generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="998f76b6-5209-4404-a8f7-3569b05e32cb"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --blue: #1d4ed8;
+      --blue-light: #3b82f6;
+      --cream: #faf8f4;
+      --text: #1a1a2e;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --green: #16a34a;
+      --amber: #f59e0b;
+      --red: #dc2626;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--navy); }
+
+    /* CONTAINER */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* PROGRESS BAR */
+    .progress-wrap {
+      margin-bottom: 2.5rem;
+    }
+    .progress-track {
+      height: 6px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 100px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+    .progress-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      text-align: right;
+    }
+
+    /* INTRO SCREEN */
+    .intro {
+      text-align: center;
+    }
+    .intro-tag {
+      display: inline-block;
+      background: rgba(29,78,216,0.08);
+      border: 1px solid rgba(29,78,216,0.2);
+      color: var(--blue);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .intro h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .intro h1 em { font-style: italic; color: var(--blue); }
+    .intro p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+    .intro-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .intro-meta-item {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* QUESTION SCREEN */
+    .question-screen { display: none; }
+    .question-screen.active { display: block; animation: fadeIn 0.4s ease; }
+    .q-number {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .q-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .option {
+      padding: 1.1rem 1.4rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .option:hover {
+      border-color: var(--blue-light);
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(29,78,216,0.08);
+    }
+    .option::after {
+      content: '→';
+      opacity: 0;
+      color: var(--blue);
+      transition: opacity 0.18s;
+    }
+    .option:hover::after { opacity: 1; }
+
+    /* TEASER / RESULTS SCREEN */
+    .teaser-screen, .results-screen, .thankyou-screen { display: none; }
+    .teaser-screen.active, .results-screen.active, .thankyou-screen.active { display: block; animation: fadeIn 0.5s ease; }
+
+    .result-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+    .result-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue-light);
+      margin-bottom: 0.8rem;
+    }
+    .stat-big {
+      font-family: 'Instrument Serif', serif;
+      font-size: 4rem;
+      line-height: 1;
+    }
+    .stat-unit { font-size: 1.2rem; color: rgba(255,255,255,0.6); }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .stat-mini {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-mini-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-mini-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+    .locked {
+      filter: blur(7px);
+      user-select: none;
+    }
+
+    /* EMAIL GATE */
+    .email-gate {
+      background: white;
+      border: 1.5px solid var(--blue-light);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin-top: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(29,78,216,0.1);
+    }
+    .email-gate h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .email-gate p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .email-input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 1rem;
+      transition: border 0.18s;
+    }
+    .email-input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+    .btn-primary {
+      width: 100%;
+      background: var(--navy);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-1px);
+    }
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .gate-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .error-msg {
+      color: var(--red);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* THANK YOU */
+    .thankyou-screen { text-align: center; }
+    .ty-icon {
+      width: 70px; height: 70px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: white;
+    }
+    .ty-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .ty-text {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ty-recommendation {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 2rem auto;
+      max-width: 500px;
+      text-align: left;
+    }
+    .ty-rec-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .ty-rec-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .ty-rec-text {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .btn-calendly {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.2s;
+      margin-bottom: 1rem;
+    }
+    .btn-calendly:hover {
+      background: var(--blue);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(29,78,216,0.25);
+    }
+    .btn-download {
+      display: inline-block;
+      background: transparent;
+      color: var(--navy);
+      padding: 0.8rem 2rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-download:hover { border-color: var(--navy); }
+
+    .btn-start {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      padding: 1.1rem 2.8rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-start:hover {
+      background: var(--blue);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(29,78,216,0.25);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1.2rem 4rem; }
+      .stat-row { grid-template-columns: 1fr; }
+      .intro-meta { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Build<span>WithNY</span></a>
+    <a href="/" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- PROGRESS BAR (hidden on intro) -->
+    <div class="progress-wrap" id="progressWrap" style="display:none;">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">Question 1 of 8</div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="intro" id="intro">
+      <div class="intro-tag">Free • 3 Minutes • No Signup To Start</div>
+      <h1>How much is manual work <em>actually costing</em> your firm?</h1>
+      <p>Answer 8 quick questions and get a personalised report showing exactly how many hours and dollars your firm loses to manual workflows every year.</p>
+      <div class="intro-meta">
+        <div class="intro-meta-item">⏱ Takes 3 minutes</div>
+        <div class="intro-meta-item">📊 Personalised report</div>
+        <div class="intro-meta-item">🎯 Built for accounting firms</div>
+      </div>
+      <button class="btn-start" onclick="startAudit()">Start My Free Audit →</button>
+    </div>
+
+    <!-- QUESTIONS get injected here -->
+    <div id="questionsContainer"></div>
+
+    <!-- TEASER + EMAIL GATE -->
+    <div class="teaser-screen" id="teaserScreen">
+      <div class="result-headline">Your results are ready</div>
+      <p class="result-sub">Here's a preview of what we found for your firm</p>
+
+      <div class="stat-card">
+        <div class="stat-label">Estimated Time Lost Per Week</div>
+        <div class="stat-big" id="teaserHours">0<span class="stat-unit"> hrs</span></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-mini">
+          <div class="stat-mini-num locked">$00,000</div>
+          <div class="stat-mini-label">Annual cost of waste</div>
+        </div>
+        <div class="stat-mini">
+          <div class="stat-mini-num locked">0/10</div>
+          <div class="stat-mini-label">Automation score</div>
+        </div>
+      </div>
+
+      <div class="email-gate">
+        <h3>Get your full report</h3>
+        <p>See your exact annual cost, your priority workflow to fix first, and a custom action plan.</p>
+        <input type="email" class="email-input" id="emailInput" placeholder="Your work email" />
+        <div class="error-msg" id="errorMsg">Please enter a valid work email.</div>
+        <button class="btn-primary" id="submitEmail" onclick="submitEmail()">Send My Full Report →</button>
+        <div class="gate-note">No spam. One email with your results. That's it.</div>
+      </div>
+    </div>
+
+    <!-- THANK YOU / FULL RESULTS -->
+    <div class="thankyou-screen" id="thankyouScreen">
+      <div class="ty-icon">✓</div>
+      <div class="ty-headline">Your report is downloading</div>
+      <p class="ty-text">Check your downloads folder for your full PDF report. Here's a summary of what we found:</p>
+
+      <div class="stat-card">
+        <div class="stat-label">Your Firm Loses Approximately</div>
+        <div class="stat-big" id="finalCost">$0<span class="stat-unit">/year</span></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-mini">
+          <div class="stat-mini-num" id="finalHours">0</div>
+          <div class="stat-mini-label">Hours wasted per week</div>
+        </div>
+        <div class="stat-mini">
+          <div class="stat-mini-num" id="finalScore">0/10</div>
+          <div class="stat-mini-label">Automation opportunity</div>
+        </div>
+      </div>
+
+      <div class="ty-recommendation">
+        <div class="ty-rec-label">Your Priority Fix</div>
+        <div class="ty-rec-title" id="recTitle">Transaction Categorization</div>
+        <div class="ty-rec-text" id="recText"></div>
+      </div>
+
+      <p class="ty-text" style="margin-top:2.5rem; font-weight:600; color:var(--navy);">Want to recover these hours? Let's talk.</p>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="btn-calendly">Book a Free 15-Min Call →</a>
+      <br/>
+      <button class="btn-download" onclick="downloadReport()">↓ Download report again</button>
+    </div>
+
+  </div>
+
+  <footer>
+    PandaLabs LLC — Registered in the United States | buildwithny.com | admin@gobuildwithny.com
+  </footer>
+
+  <script>
+    // ============ CONFIG ============
+    // Replace this with your Formspree endpoint after signup at formspree.io
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+    // ============ QUESTIONS ============
+    const questions = [
+      {
+        q: "How many client accounts does your firm manage?",
+        options: [
+          { label: "Under 10", val: 8 },
+          { label: "10 – 25", val: 18 },
+          { label: "25 – 50", val: 38 },
+          { label: "50+", val: 65 }
+        ],
+        key: "clients"
+      },
+      {
+        q: "How many hours per week does your team spend coding transactions manually?",
+        options: [
+          { label: "2 – 5 hours", val: 3.5 },
+          { label: "5 – 10 hours", val: 7.5 },
+          { label: "10 – 20 hours", val: 15 },
+          { label: "20+ hours", val: 25 }
+        ],
+        key: "codingHours"
+      },
+      {
+        q: "How many hours per week chasing clients for documents?",
+        options: [
+          { label: "Under 2 hours", val: 1.5 },
+          { label: "2 – 5 hours", val: 3.5 },
+          { label: "5 – 10 hours", val: 7.5 },
+          { label: "10+ hours", val: 12 }
+        ],
+        key: "chaseHours"
+      },
+      {
+        q: "How long does your month-end close take per client?",
+        options: [
+          { label: "Under 2 hours", val: 1.5 },
+          { label: "2 – 4 hours", val: 3 },
+          { label: "4 – 8 hours", val: 6 },
+          { label: "8+ hours", val: 10 }
+        ],
+        key: "closeHours"
+      },
+      {
+        q: "What's your average staff cost per hour?",
+        options: [
+          { label: "$25 / hour", val: 25 },
+          { label: "$35 / hour", val: 35 },
+          { label: "$45 / hour", val: 45 },
+          { label: "$55+ / hour", val: 55 }
+        ],
+        key: "hourlyCost"
+      },
+      {
+        q: "How much automation does your firm use today?",
+        options: [
+          { label: "None — all manual", val: 0 },
+          { label: "Basic (some rules)", val: 1 },
+          { label: "Moderate", val: 2 },
+          { label: "Advanced", val: 3 }
+        ],
+        key: "automationLevel"
+      },
+      {
+        q: "What's your primary accounting software?",
+        options: [
+          { label: "QuickBooks Online", val: "QBO" },
+          { label: "Xero", val: "Xero" },
+          { label: "QuickBooks Desktop", val: "QB Desktop" },
+          { label: "Other", val: "Other" }
+        ],
+        key: "software"
+      },
+      {
+        q: "How big is your team?",
+        options: [
+          { label: "1 – 5 people", val: 4 },
+          { label: "5 – 10 people", val: 8 },
+          { label: "10 – 25 people", val: 18 },
+          { label: "25+ people", val: 30 }
+        ],
+        key: "teamSize"
+      }
+    ];
+
+    let currentQ = 0;
+    const answers = {};
+
+    function startAudit() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'block';
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = `
+        <div class="question-screen active">
+          <div class="q-number">Question ${currentQ + 1} of ${questions.length}</div>
+          <div class="q-title">${q.q}</div>
+          <div class="options">
+            ${q.options.map((opt, i) => `
+              <button class="option" onclick="selectOption('${q.key}', ${typeof opt.val === 'string' ? `'${opt.val}'` : opt.val}, '${opt.label.replace(/'/g, "")}')">
+                ${opt.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      const pct = ((currentQ) / questions.length) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+    }
+
+    function selectOption(key, val, label) {
+      answers[key] = val;
+      answers[key + '_label'] = label;
+      currentQ++;
+      if (currentQ < questions.length) {
+        renderQuestion();
+      } else {
+        showTeaser();
+      }
+    }
+
+    // ============ CALCULATIONS ============
+    function calculateResults() {
+      const codingHours = answers.codingHours || 0;
+      const chaseHours = answers.chaseHours || 0;
+      const closeHoursPerClient = answers.closeHours || 0;
+      const clients = answers.clients || 10;
+      const hourlyCost = answers.hourlyCost || 35;
+      const automationLevel = answers.automationLevel || 0;
+
+      // Month-end close: per client per month → weekly equivalent
+      const monthlyCloseHours = closeHoursPerClient * Math.min(clients, 50) * 0.25; // partial — not all clients close same week
+      const weeklyCloseHours = monthlyCloseHours / 4;
+
+      let totalWeeklyHours = codingHours + chaseHours + weeklyCloseHours;
+
+      // Automation discount — if they already automate, less waste
+      const automationFactor = [1, 0.8, 0.55, 0.3][automationLevel] || 1;
+      totalWeeklyHours = totalWeeklyHours * automationFactor;
+
+      const annualHours = totalWeeklyHours * 50; // 50 working weeks
+      const annualCost = Math.round(annualHours * hourlyCost);
+
+      // Automation opportunity score 1-10
+      let score = Math.min(10, Math.round((totalWeeklyHours / 3) + (automationLevel === 0 ? 3 : 0)));
+      score = Math.max(3, score);
+
+      // Priority fix — whichever is biggest
+      let priority = "Transaction Categorization";
+      let priorityText = "";
+      const biggest = Math.max(codingHours, chaseHours, weeklyCloseHours);
+      if (biggest === codingHours) {
+        priority = "Transaction Categorization";
+        priorityText = "Your team spends the most time manually coding transactions. An AI categorization system — trained on your firm's history — can cut this by 80% while keeping your team in full control through one-click approval.";
+      } else if (biggest === chaseHours) {
+        priority = "Client Document Collection";
+        priorityText = "Chasing clients for documents is eating your team's week. An automated collection workflow sends reminders, tracks what's missing, and confirms receipt — no manual follow-up needed.";
+      } else {
+        priority = "Month-End Close Automation";
+        priorityText = "Your month-end close is the biggest drain. Automating the repetitive checklist steps and flagging only exceptions can cut close time dramatically across all your clients.";
+      }
+
+      return {
+        weeklyHours: Math.round(totalWeeklyHours),
+        annualHours: Math.round(annualHours),
+        annualCost,
+        score,
+        priority,
+        priorityText
+      };
+    }
+
+    let results = {};
+
+    function showTeaser() {
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = 'Complete';
+      results = calculateResults();
+      document.getElementById('questionsContainer').innerHTML = '';
+      document.getElementById('teaserScreen').classList.add('active');
+      // animate hours
+      animateNumber('teaserHours', results.weeklyHours, ' hrs');
+    }
+
+    function animateNumber(id, target, suffix) {
+      const el = document.getElementById(id);
+      let current = 0;
+      const step = Math.max(1, Math.ceil(target / 30));
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(interval); }
+        el.innerHTML = current + '<span class="stat-unit">' + suffix + '</span>';
+      }, 30);
+    }
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(email)) return false;
+      // block common free providers to encourage work email (soft)
+      return true;
+    }
+
+    async function submitEmail() {
+      const email = document.getElementById('emailInput').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const btn = document.getElementById('submitEmail');
+
+      if (!validateEmail(email)) {
+        errorMsg.style.display = 'block';
+        return;
+      }
+      errorMsg.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      answers.email = email;
+
+      // Send to Formspree (so YOU get notified)
+      try {
+        await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            firm_clients: answers.clients_label,
+            coding_hours: answers.codingHours_label,
+            chase_hours: answers.chaseHours_label,
+            close_hours: answers.closeHours_label,
+            hourly_cost: answers.hourlyCost_label,
+            automation: answers.automationLevel_label,
+            software: answers.software_label,
+            team_size: answers.teamSize_label,
+            calculated_weekly_hours: results.weeklyHours,
+            calculated_annual_cost: '$' + results.annualCost.toLocaleString(),
+            priority_fix: results.priority
+          })
+        });
+      } catch (e) {
+        console.log('Form submission note:', e);
+        // Continue anyway — don't block the user
+      }
+
+      // Show full results + auto-download PDF
+      showThankYou();
+      setTimeout(downloadReport, 800);
+    }
+
+    function showThankYou() {
+      document.getElementById('teaserScreen').classList.remove('active');
+      document.getElementById('thankyouScreen').classList.add('active');
+      document.getElementById('progressWrap').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.getElementById('finalCost').innerHTML = '$' + results.annualCost.toLocaleString() + '<span class="stat-unit">/year</span>';
+      document.getElementById('finalHours').textContent = results.weeklyHours;
+      document.getElementById('finalScore').textContent = results.score + '/10';
+      document.getElementById('recTitle').textContent = results.priority;
+      document.getElementById('recText').textContent = results.priorityText;
+    }
+
+    // ============ PDF GENERATION ============
+    function downloadReport() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const navy = [15, 31, 61];
+      const blue = [29, 78, 216];
+      const gray = [100, 116, 139];
+
+      // Header bar
+      doc.setFillColor(...navy);
+      doc.rect(0, 0, 210, 38, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.text('BuildWithNY', 20, 20);
+      doc.setFontSize(10);
+      doc.setTextColor(170, 204, 238);
+      doc.text('Automation Audit Report', 20, 28);
+
+      // Title
+      doc.setTextColor(...navy);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.text('Your Firm Automation Audit', 20, 55);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...gray);
+      doc.text('Prepared for: ' + (answers.email || ''), 20, 63);
+      doc.text('Date: ' + new Date().toLocaleDateString(), 20, 69);
+
+      // Big stat box
+      doc.setFillColor(...navy);
+      doc.roundedRect(20, 78, 170, 30, 3, 3, 'F');
+      doc.setTextColor(170, 204, 238);
+      doc.setFontSize(9);
+      doc.text('ESTIMATED ANNUAL COST OF MANUAL WORK', 28, 90);
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(24);
+      doc.text('$' + results.annualCost.toLocaleString() + ' / year', 28, 102);
+
+      // Key metrics
+      let y = 122;
+      doc.setTextColor(...navy);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      doc.text('Key Findings', 20, y);
+      y += 10;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(11);
+      doc.setTextColor(50, 50, 50);
+      const findings = [
+        ['Hours wasted per week:', results.weeklyHours + ' hours'],
+        ['Hours wasted per year:', results.annualHours.toLocaleString() + ' hours'],
+        ['Automation opportunity score:', results.score + ' / 10'],
+        ['Primary software:', answers.software_label || 'N/A'],
+        ['Team size:', answers.teamSize_label || 'N/A']
+      ];
+      findings.forEach(([label, val]) => {
+        doc.setTextColor(...gray);
+        doc.text(label, 24, y);
+        doc.setTextColor(...navy);
+        doc.setFont('helvetica', 'bold');
+        doc.text(val, 110, y);
+        doc.setFont('helvetica', 'normal');
+        y += 9;
+      });
+
+      // Priority recommendation
+      y += 6;
+      doc.setFillColor(240, 247, 252);
+      doc.roundedRect(20, y, 170, 48, 3, 3, 'F');
+      y += 10;
+      doc.setTextColor(...blue);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text('YOUR PRIORITY FIX', 26, y);
+      y += 8;
+      doc.setTextColor(...navy);
+      doc.setFontSize(13);
+      doc.text(results.priority, 26, y);
+      y += 8;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(60, 60, 60);
+      const splitText = doc.splitTextToSize(results.priorityText, 158);
+      doc.text(splitText, 26, y);
+
+      // CTA box
+      y = 245;
+      doc.setFillColor(...navy);
+      doc.roundedRect(20, y, 170, 32, 3, 3, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.text('Ready to recover these hours?', 28, y + 12);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(170, 204, 238);
+      doc.text('Book a free 15-min call: calendly.com/admin-gobuildwithny/30min', 28, y + 22);
+
+      // Footer
+      doc.setTextColor(...gray);
+      doc.setFontSize(8);
+      doc.text('PandaLabs LLC  |  buildwithny.com  |  admin@gobuildwithny.com', 20, 290);
+
+      doc.save('BuildWithNY-Audit-Report.pdf');
+    }
+  </script>
+
+</body>
+</html>

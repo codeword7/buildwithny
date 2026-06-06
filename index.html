@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BuildWithNY — AI Workflows for Accounting Firms</title>
   <meta name="description" content="We build AI-powered workflows for accounting firms. 2-week sprint. Fixed fee. Your team stays in control." />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="998f76b6-5209-4404-a8f7-3569b05e32cb"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -70,6 +71,19 @@
     }
 
     .nav-cta:hover { background: var(--blue); }
+
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+
+    .nav-link {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.45rem 0.65rem;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-link:hover { background: rgba(29,78,216,0.06); color: var(--blue); }
 
     /* ── HERO ── */
     .hero {
@@ -697,7 +711,11 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Build<span>WithNY</span></a>
+    <a href="/" class="nav-logo">Build<span>WithNY</span></a>
+    <div class="nav-links">
+      <a href="/audit" class="nav-link">Audit</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
     <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Free Call</a>
   </nav>
 

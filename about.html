@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — BuildWithNY</title>
+  <meta name="description" content="The engineer behind BuildWithNY. I build AI workflows that give accounting firms their time back." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="998f76b6-5209-4404-a8f7-3569b05e32cb"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --blue: #1d4ed8;
+      --blue-light: #3b82f6;
+      --cream: #faf8f4;
+      --warm-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--navy);
+      color: white;
+      padding: 0.55rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue); }
+
+    /* HERO */
+    .about-hero {
+      padding: 9rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .avatar-wrap {
+      position: relative;
+    }
+    .avatar {
+      width: 100%;
+      border-radius: 20px;
+      border: 3px solid white;
+      box-shadow: 0 20px 50px rgba(15, 31, 61, 0.18);
+      display: block;
+    }
+    .avatar-badge {
+      position: absolute;
+      bottom: -12px;
+      right: -12px;
+      background: var(--navy);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      box-shadow: 0 8px 20px rgba(15,31,61,0.25);
+    }
+
+    .about-intro-tag {
+      display: inline-block;
+      background: rgba(29,78,216,0.08);
+      border: 1px solid rgba(29,78,216,0.2);
+      color: var(--blue);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .about-hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .about-hero h1 em { font-style: italic; color: var(--blue); }
+    .about-hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    /* STORY */
+    .story {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+    .story h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem;
+      color: var(--navy);
+      margin: 2.5rem 0 1rem;
+    }
+    .story p {
+      font-size: 1.05rem;
+      color: #374151;
+      margin-bottom: 1.2rem;
+    }
+    .story strong { color: var(--navy); font-weight: 600; }
+
+    .highlight-box {
+      background: white;
+      border-left: 4px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem 1.8rem;
+      margin: 2rem 0;
+      font-size: 1.05rem;
+      color: var(--navy);
+      font-style: italic;
+    }
+
+    /* VALUES */
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .value-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .value-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .value-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .value-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* CTA */
+    .about-cta {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -10%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%);
+    }
+    .about-cta h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 0.8rem;
+    }
+    .about-cta p {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2rem;
+    }
+    .btn-white {
+      display: inline-block;
+      background: white;
+      color: var(--navy);
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--blue-light); }
+    .footer-info {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .about-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 7rem 1.5rem 2rem;
+        gap: 2rem;
+      }
+      .avatar-wrap { max-width: 220px; margin: 0 auto; }
+      .nav-links .nav-link { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-info { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Build<span>WithNY</span></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/audit.html" class="nav-link">Free Audit</a>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="avatar-wrap">
+      <img src="neeraj.jpg" alt="Neeraj Yadav" class="avatar" />
+      <div class="avatar-badge">Founder</div>
+    </div>
+    <div>
+      <div class="about-intro-tag">About</div>
+      <h1>Hi, I'm Neeraj —<br/>I build things that <em>save time</em></h1>
+      <p class="about-hero-sub">Engineer by trade. Founder of PandaLabs LLC. I help accounting firms automate the work that shouldn't be manual.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story">
+    <p>I've spent years as a software engineer building systems that make complex things simple. Somewhere along the way I realised the most valuable thing I could build wasn't another app — it was <strong>time back for people drowning in repetitive work.</strong></p>
+
+    <p>That led me to accounting firms. When I looked closely at how small and mid-sized firms operate, I saw the same story everywhere: talented people spending 10 to 15 hours a week coding transactions, chasing client documents, and grinding through month-end close — work that modern AI can handle in a fraction of the time.</p>
+
+    <div class="highlight-box">
+      "The goal was never to replace anyone. It was to take the repetitive work off their plate so the team can focus on what actually needs human judgment."
+    </div>
+
+    <h2>What I Build</h2>
+    <p>Through <strong>BuildWithNY</strong>, I build custom AI-powered workflows for accounting and bookkeeping firms. Not generic tools — systems built specifically around your firm's processes, your chart of accounts, your clients.</p>
+
+    <p>Everything I build keeps a <strong>human in control.</strong> The AI does the heavy lifting; your team approves. Every action is logged with a full audit trail. Built in two weeks, fixed fee, and you own it permanently — no subscriptions, no lock-in.</p>
+
+    <h2>How I Work</h2>
+    <div class="values">
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <h3>Fast & Focused</h3>
+        <p>Two-week sprints. No endless timelines, no scope creep. Build, test, hand over.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔍</div>
+        <h3>Human in Control</h3>
+        <p>AI assists, your team approves. Nothing posts without sign-off. Full audit trail.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <h3>You Own It</h3>
+        <p>No ongoing fees, no dependency. The system is yours to keep and run forever.</p>
+      </div>
+    </div>
+
+    <h2>Why It Matters To Me</h2>
+    <p>I genuinely enjoy the craft of building. There's something satisfying about taking a messy, manual, frustrating process and turning it into something that just works quietly in the background. When a firm gets back 10 hours a week — that's real time their team gets back for clients, for growth, or simply for not burning out during tax season.</p>
+
+    <p>If that sounds like something your firm could use, I'd love to talk.</p>
+
+    <!-- CTA -->
+    <div class="about-cta">
+      <h2>Let's build something useful</h2>
+      <p>Free 15-minute call. No pitch — just a straight look at what we could automate for your firm.</p>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="btn-white">Book a Free Call →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="/" class="footer-logo">Build<span>WithNY</span></a>
+    <div class="footer-info">
+      <div>PandaLabs LLC — Registered in the United States</div>
+      <div>admin@gobuildwithny.com | © 2026 BuildWithNY</div>
+    </div>
+  </footer>
+
+</body>
+</html>
