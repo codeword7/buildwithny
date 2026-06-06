@@ -277,7 +277,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
+      z-index: 300;
       padding: 0.9rem 1.5rem;
       display: flex;
       align-items: center;
@@ -557,9 +557,18 @@
   <script>
     function toggleMenu(){ document.body.classList.toggle('menu-open'); }
     function closeMenu(){ document.body.classList.remove('menu-open'); }
-    // close menu when a link is tapped
+    // Internal nav links: navigate directly so the slide-out menu never
+    // swallows the tap on mobile. External / new-tab links behave normally.
     document.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a){
-      a.addEventListener('click', closeMenu);
+      a.addEventListener('click', function(e){
+        var href = a.getAttribute('href');
+        var newTab = a.getAttribute('target') === '_blank';
+        document.body.classList.remove('menu-open');
+        if (href && !newTab && !href.startsWith('#')) {
+          e.preventDefault();
+          window.location.href = href;
+        }
+      });
     });
   </script>
 
