@@ -1,3 +1,4 @@
+# Clean URL redirects (so /audit works without .html)
 [[redirects]]
   from = "/audit"
   to = "/audit.html"
@@ -8,7 +9,8 @@
   to = "/about.html"
   status = 200
 
+# 404 fallback — send unknown paths to home
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
+  status = 404

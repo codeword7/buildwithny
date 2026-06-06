@@ -66,7 +66,7 @@
     .container {
       max-width: 680px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 6.5rem 1.5rem 5rem;
     }
 
     /* PROGRESS BAR */
@@ -457,17 +457,115 @@
     }
 
     @media (max-width: 600px) {
-      .container { padding: 2rem 1.2rem 4rem; }
+      .container { padding: 5.5rem 1.2rem 4rem; }
       .stat-row { grid-template-columns: 1fr; }
       .intro-meta { gap: 1rem; }
     }
+  
+    /* ===== UNIFIED NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-right { display: flex; align-items: center; gap: 0.4rem; }
+    .nav-links { display: flex; gap: 0.3rem; align-items: center; }
+    .nav-link {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-link:hover { background: rgba(29,78,216,0.06); color: var(--blue); }
+    .nav-link.active { color: var(--blue); background: rgba(29,78,216,0.08); }
+    .nav-cta {
+      background: var(--navy);
+      color: white;
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+      margin-left: 0.5rem;
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    @media (max-width: 600px) {
+      nav { padding: 0.9rem 1.1rem; }
+      .nav-link { padding: 0.4rem 0.55rem; font-size: 0.85rem; }
+      .nav-cta { padding: 0.5rem 0.9rem; font-size: 0.82rem; }
+    }
+    /* ===== END UNIFIED NAV ===== */
+
+    /* ===== UNIFIED FOOTER ===== */
+    footer {
+      background: var(--navy);
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--blue-light, #3b82f6); }
+    .footer-links { display: flex; gap: 1.3rem; flex-wrap: wrap; }
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-info {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+    }
+    @media (max-width: 700px) {
+      footer { flex-direction: column; text-align: center; }
+      .footer-info { text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+    /* ===== END UNIFIED FOOTER ===== */
+
   </style>
 </head>
 <body>
 
   <nav>
     <a href="/" class="nav-logo">Build<span>WithNY</span></a>
-    <a href="/" class="nav-back">← Back to site</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/audit" class="nav-link active">Free Audit</a>
+        <a href="/about" class="nav-link">About</a>
+      </div>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Call</a>
+    </div>
   </nav>
 
   <div class="container">
@@ -562,13 +660,23 @@
   </div>
 
   <footer>
-    PandaLabs LLC — Registered in the United States | buildwithny.com | admin@gobuildwithny.com
+    <a href="/" class="footer-logo">Build<span>WithNY</span></a>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/audit">Free Audit</a>
+      <a href="/about">About</a>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank">Book a Call</a>
+    </div>
+    <div class="footer-info">
+      <div>PandaLabs LLC — Registered in the United States</div>
+      <div>admin@gobuildwithny.com &nbsp;|&nbsp; &copy; 2026 BuildWithNY</div>
+    </div>
   </footer>
 
   <script>
     // ============ CONFIG ============
     // Replace this with your Formspree endpoint after signup at formspree.io
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mvznzbnn";
 
     // ============ QUESTIONS ============
     const questions = [
