@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — BuildWithNY</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="description" content="The engineer behind BuildWithNY. I build AI workflows that give accounting firms their time back." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,50 +36,6 @@
       color: var(--text);
       line-height: 1.7;
     }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.2rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(250, 248, 244, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.4rem;
-      color: var(--navy);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-    .nav-link {
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: var(--navy); }
-    .nav-cta {
-      background: var(--navy);
-      color: white;
-      padding: 0.55rem 1.4rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: var(--blue); }
 
     /* HERO */
     .about-hero {
@@ -268,7 +227,6 @@
         gap: 2rem;
       }
       .avatar-wrap { max-width: 220px; margin: 0 auto; }
-      .nav-links .nav-link { display: none; }
       footer { flex-direction: column; text-align: center; }
       .footer-info { text-align: center; }
     }
