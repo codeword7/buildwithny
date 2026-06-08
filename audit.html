@@ -186,6 +186,12 @@
       transform: translateX(4px);
       box-shadow: 0 4px 16px rgba(29,78,216,0.08);
     }
+    .option.selected {
+      border-color: var(--blue-light);
+      background: rgba(59,130,246,0.06);
+      transform: translateX(4px);
+      box-shadow: 0 6px 20px rgba(29,78,216,0.08);
+    }
     .option::after {
       content: '→';
       opacity: 0;
@@ -794,6 +800,21 @@
         key: "clients"
       },
       {
+        q: "Which tools does your firm use? (Select all that apply)",
+        multi: true,
+        options: [
+          { label: "QuickBooks Online", val: "QuickBooks Online" },
+          { label: "Xero", val: "Xero" },
+          { label: "Karbon", val: "Karbon" },
+          { label: "TaxDome", val: "TaxDome" },
+          { label: "Financial Cents", val: "Financial Cents" },
+          { label: "Keeper or Double", val: "Keeper or Double" },
+          { label: "Spreadsheets", val: "Spreadsheets" },
+          { label: "Other", val: "Other" }
+        ],
+        key: "tools"
+      },
+      {
         q: "How many hours per week does your team spend coding transactions manually?",
         options: [
           { label: "2 – 5 hours", val: 3.5 },
@@ -877,22 +898,58 @@
     function renderQuestion() {
       const q = questions[currentQ];
       const container = document.getElementById('questionsContainer');
-      container.innerHTML = `
-        <div class="question-screen active">
-          <div class="q-number">Question ${currentQ + 1} of ${questions.length}</div>
-          <div class="q-title">${q.q}</div>
-          <div class="options">
-            ${q.options.map((opt, i) => `
-              <button class="option" onclick="selectOption('${q.key}', ${typeof opt.val === 'string' ? `'${opt.val}'` : opt.val}, '${opt.label.replace(/'/g, "")}')">
-                ${opt.label}
-              </button>
-            `).join('')}
+
+      if (q.multi) {
+        container.innerHTML = `
+          <div class="question-screen active">
+            <div class="q-number">Question ${currentQ + 1} of ${questions.length}</div>
+            <div class="q-title">${q.q}</div>
+            <div class="options">
+              ${q.options.map((opt) => `
+                <button class="option" onclick="toggleOption(this)">${opt.label}</button>
+              `).join('')}
+            </div>
+            <div style="margin-top:1.2rem; display:flex; gap:0.6rem;">
+              <button class="btn-primary" onclick="submitMulti('${q.key}')">Next →</button>
+              <button class="btn-secondary" onclick="(function(){ currentQ++; if (currentQ < questions.length) renderQuestion(); else showTeaser(); })()">Skip</button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="question-screen active">
+            <div class="q-number">Question ${currentQ + 1} of ${questions.length}</div>
+            <div class="q-title">${q.q}</div>
+            <div class="options">
+              ${q.options.map((opt, i) => `
+                <button class="option" onclick="selectOption('${q.key}', ${typeof opt.val === 'string' ? `'${opt.val}'` : opt.val}, '${opt.label.replace(/'/g, "")}')">
+                  ${opt.label}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       const pct = ((currentQ) / questions.length) * 100;
       document.getElementById('progressFill').style.width = pct + '%';
       document.getElementById('progressText').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+    }
+
+    function toggleOption(btn) {
+      btn.classList.toggle('selected');
+    }
+
+    function submitMulti(key) {
+      const selected = Array.from(document.querySelectorAll('.option.selected')).map(b => b.textContent.trim());
+      answers[key] = selected;
+      answers[key + '_label'] = selected.join(', ');
+      currentQ++;
+      if (currentQ < questions.length) {
+        renderQuestion();
+      } else {
+        showTeaser();
+      }
     }
 
     function selectOption(key, val, label) {
@@ -1016,6 +1073,7 @@
             hourly_cost: answers.hourlyCost_label,
             automation: answers.automationLevel_label,
             software: answers.software_label,
+            tools: answers.tools_label,
             team_size: answers.teamSize_label,
             calculated_weekly_hours: results.weeklyHours,
             calculated_annual_cost: '$' + results.annualCost.toLocaleString(),
