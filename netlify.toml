@@ -9,6 +9,17 @@
   to = "/about.html"
   status = 200
 
+# Blog clean URLs
+[[redirects]]
+  from = "/blog"
+  to = "/blog/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/document-collection-automation"
+  to = "/blog/document-collection-automation.html"
+  status = 200
+
 # 404 fallback — send unknown paths to home
 [[redirects]]
   from = "/*"

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Workflow Automation for Accounting Firms | BuildWithNY</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="description" content="Practical writing on automating document collection, month-end close, and client workflows for accounting and CPA firms running QuickBooks, Xero, Karbon, and TaxDome." />
+  <link rel="canonical" href="https://buildwithny.com/blog" />
+  <meta property="og:title" content="BuildWithNY Blog — Workflow Automation for Accounting Firms" />
+  <meta property="og:description" content="Practical writing on automating document collection, month-end close, and client workflows for accounting firms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buildwithny.com/blog" />
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="998f76b6-5209-4404-a8f7-3569b05e32cb"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f1f3d; --navy-mid: #1a3260; --blue: #1d4ed8; --blue-light: #3b82f6;
+      --cream: #faf8f4; --warm-white: #ffffff; --text: #1a1a2e; --muted: #64748b;
+      --border: #e2e8f0; --accent: #f59e0b;
+    }
+    html { scroll-behavior: smooth; height: 100%; }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text);
+      line-height: 1.6; overflow-x: hidden; min-height: 100vh; min-height: 100dvh;
+      display: flex; flex-direction: column;
+    }
+
+    /* NAV (shared) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(250, 248, 244, 0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); min-height: 62px;
+    }
+    .nav-logo { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--navy); text-decoration: none; letter-spacing: -0.02em; z-index: 210; }
+    .nav-logo span { color: var(--blue); }
+    .nav-right { display: flex; align-items: center; gap: 0.4rem; }
+    .nav-links { display: flex; gap: 0.3rem; align-items: center; }
+    .nav-link { color: var(--navy); text-decoration: none; font-weight: 500; font-size: 0.92rem; padding: 0.45rem 0.85rem; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+    .nav-link:hover { background: rgba(29,78,216,0.06); color: var(--blue); }
+    .nav-link.active { color: var(--blue); background: rgba(29,78,216,0.08); }
+    .nav-cta { background: var(--navy); color: white; padding: 0.55rem 1.2rem; border-radius: 6px; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: background 0.2s, transform 0.2s; margin-left: 0.5rem; white-space: nowrap; }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 42px; height: 42px; background: none; border: none; cursor: pointer; z-index: 210; padding: 8px; }
+    .nav-toggle span { display: block; height: 2px; width: 100%; background: var(--navy); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 760px) {
+      .nav-toggle { display: flex; }
+      .nav-right { position: fixed; top: 0; right: 0; height: 100vh; width: min(78vw, 320px); background: var(--cream); flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 5.5rem 1.5rem 2rem; box-shadow: -10px 0 40px rgba(15,31,61,0.15); transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.4,0,0.2,1); z-index: 205; }
+      body.menu-open .nav-right { transform: translateX(0); }
+      .nav-links { flex-direction: column; align-items: stretch; gap: 0.3rem; width: 100%; }
+      .nav-link { font-size: 1.05rem; padding: 0.9rem 1rem; border-radius: 8px; }
+      .nav-cta { margin-left: 0; margin-top: 1rem; text-align: center; padding: 0.9rem 1rem; font-size: 1rem; }
+      .nav-overlay { position: fixed; inset: 0; background: rgba(15,31,61,0.4); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 204; }
+      body.menu-open .nav-overlay { opacity: 1; pointer-events: auto; }
+    }
+    .nav-spacer { height: 62px; flex: 0 0 auto; }
+
+    /* blog header */
+    .blog-main { flex: 1 0 auto; }
+    .blog-hero {
+      max-width: 1000px; margin: 0 auto; padding: 3.5rem 1.5rem 1.5rem; text-align: center;
+    }
+    .blog-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(29, 78, 216, 0.08); border: 1px solid rgba(29, 78, 216, 0.2);
+      color: var(--blue); padding: 0.35rem 1rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .blog-tag::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+    .blog-hero h1 {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.1; letter-spacing: -0.02em; color: var(--navy); margin-bottom: 1.1rem;
+    }
+    .blog-hero h1 em { font-style: italic; color: var(--blue); }
+    .blog-hero p { font-size: 1.12rem; color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+    /* post grid */
+    .posts {
+      max-width: 1000px; margin: 0 auto; padding: 2.5rem 1.5rem 1rem;
+      display: grid; grid-template-columns: 1fr; gap: 1.4rem;
+    }
+
+    /* featured (first) post is larger */
+    .post-card {
+      background: white; border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.8rem; text-decoration: none; color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      display: block;
+    }
+    .post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(15,31,61,0.10);
+      border-color: rgba(29,78,216,0.3);
+    }
+    .post-card.featured {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-color: var(--navy);
+    }
+    .post-meta {
+      display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;
+      font-size: 0.78rem; margin-bottom: 1rem;
+    }
+    .post-pill {
+      background: rgba(29,78,216,0.08); color: var(--blue);
+      padding: 0.25rem 0.75rem; border-radius: 100px; font-weight: 600;
+      letter-spacing: 0.03em; text-transform: uppercase; font-size: 0.7rem;
+    }
+    .post-card.featured .post-pill { background: rgba(255,255,255,0.15); color: white; }
+    .post-date { color: var(--muted); }
+    .post-card.featured .post-date { color: rgba(255,255,255,0.6); }
+    .post-card h2 {
+      font-family: 'Instrument Serif', serif; font-size: 1.6rem; line-height: 1.18;
+      color: var(--navy); margin-bottom: 0.7rem; letter-spacing: -0.01em;
+    }
+    .post-card.featured h2 { color: white; font-size: clamp(1.7rem, 3.5vw, 2.2rem); }
+    .post-card p { font-size: 0.98rem; color: var(--muted); line-height: 1.6; margin: 0; }
+    .post-card.featured p { color: rgba(255,255,255,0.8); }
+    .post-readmore {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 1.1rem; font-weight: 600; font-size: 0.9rem; color: var(--blue);
+    }
+    .post-card.featured .post-readmore { color: var(--blue-light); }
+
+    @media (min-width: 720px) {
+      .posts { grid-template-columns: 1fr 1fr; }
+      .post-card.featured { grid-column: 1 / -1; }
+    }
+
+    /* newsletter / coming soon strip */
+    .more-strip {
+      max-width: 1000px; margin: 1.5rem auto 0; padding: 0 1.5rem;
+    }
+    .more-inner {
+      background: white; border: 1px dashed var(--border); border-radius: 14px;
+      padding: 1.6rem; text-align: center;
+    }
+    .more-inner p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+    .more-inner a { color: var(--blue); text-decoration: none; font-weight: 600; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); padding: 2.5rem 2rem; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1.2rem; flex: 0 0 auto; margin-top: 3.5rem;
+    }
+    .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--blue-light); }
+    .footer-links { display: flex; gap: 1.3rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-info { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: right; }
+    @media (max-width: 700px) {
+      footer { flex-direction: column; text-align: center; }
+      .footer-info { text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" onclick="closeMenu()"></div>
+  <nav>
+    <a href="/" class="nav-logo">Build<span>WithNY</span></a>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/audit" class="nav-link">Free Audit</a>
+        <a href="/blog" class="nav-link active">Blog</a>
+        <a href="/about" class="nav-link">About</a>
+      </div>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Call</a>
+    </div>
+  </nav>
+  <div class="nav-spacer"></div>
+
+  <main class="blog-main">
+
+    <section class="blog-hero">
+      <div class="blog-tag">The BuildWithNY Blog</div>
+      <h1>Notes on automating the <em>boring</em> parts of running a firm</h1>
+      <p>Practical, no-hype writing on document collection, month-end close, and client workflows — for accounting firms that already run QuickBooks, Xero, Karbon, and TaxDome.</p>
+    </section>
+
+    <section class="posts">
+
+      <!-- Featured post -->
+      <a href="/blog/document-collection-automation" class="post-card featured">
+        <div class="post-meta">
+          <span class="post-pill">For Accounting Firms</span>
+          <span class="post-date">June 11, 2026 · 8 min read</span>
+        </div>
+        <h2>Your firm already has the tools to fix document chasing. Here's what's actually missing.</h2>
+        <p>You already pay for TaxDome or Karbon. The reminders are firing. Your team is still chasing documents 10 hours a week. The tools aren't broken — the gap is between them. Here's what the real fix looks like, with the numbers behind it.</p>
+        <span class="post-readmore">Read the article →</span>
+      </a>
+
+      <!-- Placeholder slots for future posts — duplicate the block below to add new posts -->
+      <!--
+      <a href="/blog/your-next-post-slug" class="post-card">
+        <div class="post-meta">
+          <span class="post-pill">Category</span>
+          <span class="post-date">Date · X min read</span>
+        </div>
+        <h2>Post title goes here</h2>
+        <p>Short summary of the post.</p>
+        <span class="post-readmore">Read the article →</span>
+      </a>
+      -->
+
+    </section>
+
+    <div class="more-strip">
+      <div class="more-inner">
+        <p>More articles coming soon. Want one in your inbox when it's live? <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" rel="noopener">Book a call</a> or reach out at admin@gobuildwithny.com.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <a href="/" class="footer-logo">Build<span>WithNY</span></a>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/audit">Free Audit</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank">Book a Call</a>
+    </div>
+    <div class="footer-info">
+      <div>PandaLabs LLC — Registered in the United States</div>
+      <div>admin@gobuildwithny.com &nbsp;|&nbsp; &copy; 2026 BuildWithNY</div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.body.classList.toggle('menu-open'); }
+    function closeMenu(){ document.body.classList.remove('menu-open'); }
+    document.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var href = a.getAttribute('href');
+        var newTab = a.getAttribute('target') === '_blank';
+        document.body.classList.remove('menu-open');
+        if (href && !newTab && !href.startsWith('#')) {
+          e.preventDefault();
+          window.location.href = href;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
