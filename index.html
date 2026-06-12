@@ -585,6 +585,48 @@
     }
 
     /* ── CTA ── */
+    .tool-promo {
+      background: var(--cream);
+      padding: 5rem 2rem;
+    }
+    .tool-promo-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 24px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .tool-promo-text .section-label { color: var(--blue-light); margin-bottom: 1rem; }
+    .tool-promo-text h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: white; line-height: 1.15; margin-bottom: 1rem; font-weight: 400;
+    }
+    .tool-promo-text h2 em { font-style: italic; color: var(--blue-light); }
+    .tool-promo-text p {
+      color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 1.6rem; line-height: 1.6;
+    }
+    .tool-promo-text .btn-primary {
+      background: white; color: var(--navy);
+    }
+    .tool-promo-text .btn-primary:hover { background: var(--blue-light); color: white; }
+    .tool-promo-visual {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 2rem 1.5rem; text-align: center;
+    }
+    .tpv-label { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.6rem; }
+    .tpv-num { font-family: 'Instrument Serif', serif; font-size: clamp(2.6rem, 7vw, 3.6rem); color: var(--blue-light); line-height: 1; }
+    .tpv-sub { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; }
+    @media (max-width: 760px) {
+      .tool-promo { padding: 3.5rem 1.2rem; }
+      .tool-promo-inner { grid-template-columns: 1fr; padding: 2rem; gap: 1.8rem; }
+    }
+
     .cta-section {
       background: white;
       padding: 7rem 2rem;
@@ -909,6 +951,7 @@
       <div class="nav-links">
         <a href="/" class="nav-link active">Home</a>
         <a href="/audit" class="nav-link">Free Audit</a>
+        <a href="/tools/document-chasing-cost-calculator" class="nav-link">Tools</a>
         <a href="/blog" class="nav-link">Blog</a>
         <a href="/about" class="nav-link">About</a>
       </div>
@@ -982,6 +1025,23 @@
           <h3>Your tools don't talk to each other</h3>
           <p>You've invested in QBO, Karbon, maybe Keeper. But your team still copies data between systems and runs the same manual checklist every month. That's the gap we fill.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE TOOL PROMO -->
+  <section class="tool-promo">
+    <div class="tool-promo-inner">
+      <div class="tool-promo-text">
+        <div class="section-label">Free Tool</div>
+        <h2>See what document chasing costs <em>your</em> firm</h2>
+        <p>Enter three numbers — clients, hourly rate, hours spent chasing — and get your firm's specific annual cost in seconds. No signup, runs entirely in your browser.</p>
+        <a href="/tools/document-chasing-cost-calculator" class="btn-primary">Calculate your firm's number →</a>
+      </div>
+      <div class="tool-promo-visual">
+        <div class="tpv-label">Estimated annual cost</div>
+        <div class="tpv-num">$38,400</div>
+        <div class="tpv-sub">for a typical 120-client firm</div>
       </div>
     </div>
   </section>
