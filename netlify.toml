@@ -20,6 +20,12 @@
   to = "/blog/document-collection-automation.html"
   status = 200
 
+# Tools clean URLs
+[[redirects]]
+  from = "/tools/document-chasing-cost-calculator"
+  to = "/tools/document-chasing-cost-calculator.html"
+  status = 200
+
 # 404 fallback — send unknown paths to home
 [[redirects]]
   from = "/*"

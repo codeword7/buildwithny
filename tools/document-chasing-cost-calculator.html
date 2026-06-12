@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Chasing Cost Calculator — What Late Client Documents Cost Your Firm | BuildWithNY</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="description" content="Free calculator: find out exactly what chasing client documents costs your accounting firm every year. Enter your clients, partner rate, and hours spent chasing — get your firm's specific annual cost in seconds." />
+  <meta name="keywords" content="document chasing cost calculator, accounting firm cost calculator, client document collection cost, CPA firm efficiency calculator, bookkeeping time cost, accounting automation ROI" />
+  <link rel="canonical" href="https://buildwithny.com/tools/document-chasing-cost-calculator" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Document Chasing Cost Calculator — What Late Documents Cost Your Firm" />
+  <meta property="og:description" content="Enter three numbers. See exactly what chasing client documents costs your firm every year. Free, instant, no signup." />
+  <meta property="og:url" content="https://buildwithny.com/tools/document-chasing-cost-calculator" />
+  <meta property="og:image" content="https://buildwithny.com/neeraj.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Document Chasing Cost Calculator" />
+  <meta name="twitter:description" content="See exactly what chasing client documents costs your accounting firm every year. Free and instant." />
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="998f76b6-5209-4404-a8f7-3569b05e32cb"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tool / WebApplication structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Document Chasing Cost Calculator",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Free calculator that estimates the annual cost to an accounting firm of chasing client documents, based on client count, partner hourly rate, and hours spent on follow-up.",
+    "url": "https://buildwithny.com/tools/document-chasing-cost-calculator",
+    "publisher": {
+      "@type": "Organization",
+      "name": "BuildWithNY",
+      "logo": { "@type": "ImageObject", "url": "https://buildwithny.com/favicon-32.png" }
+    }
+  }
+  </script>
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does chasing client documents cost an accounting firm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It varies by firm size, but a typical 10-20 person firm spends 8-12 hours per week on document follow-up during busy periods. At a partner or senior rate, that often works out to tens of thousands of dollars per year in labor cost alone, before counting delayed work and lost billable capacity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the document chasing cost calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The calculator multiplies the hours your team spends chasing documents each week by your blended hourly rate, then annualizes it across your active weeks per year. It gives a conservative labor-only estimate of what manual document follow-up costs your firm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can document chasing be automated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Most of the manual follow-up can be automated with a layer that connects the tools a firm already runs (such as QuickBooks, Xero, Karbon, or TaxDome), sends personalized reminders, pauses them automatically when documents arrive, and escalates only when needed."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --blue: #1d4ed8;
+      --blue-light: #3b82f6;
+      --cream: #faf8f4;
+      --warm-white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #f59e0b;
+      --green: #1e8449;
+    }
+
+    html { scroll-behavior: smooth; height: 100%; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh; min-height: 100dvh;
+      display: flex; flex-direction: column;
+    }
+
+    /* NAV (shared with rest of site) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(250, 248, 244, 0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); min-height: 62px;
+    }
+    .nav-logo { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--navy); text-decoration: none; letter-spacing: -0.02em; z-index: 210; }
+    .nav-logo span { color: var(--blue); }
+    .nav-right { display: flex; align-items: center; gap: 0.4rem; }
+    .nav-links { display: flex; gap: 0.3rem; align-items: center; }
+    .nav-link { color: var(--navy); text-decoration: none; font-weight: 500; font-size: 0.92rem; padding: 0.45rem 0.85rem; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+    .nav-link:hover { background: rgba(29,78,216,0.06); color: var(--blue); }
+    .nav-link.active { color: var(--blue); background: rgba(29,78,216,0.08); }
+    .nav-cta { background: var(--navy); color: white; padding: 0.55rem 1.2rem; border-radius: 6px; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: background 0.2s, transform 0.2s; margin-left: 0.5rem; white-space: nowrap; }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 42px; height: 42px; background: none; border: none; cursor: pointer; z-index: 210; padding: 8px; }
+    .nav-toggle span { display: block; height: 2px; width: 100%; background: var(--navy); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 760px) {
+      .nav-toggle { display: flex; }
+      .nav-right { position: fixed; top: 0; right: 0; height: 100vh; width: min(78vw, 320px); background: var(--cream); flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 5.5rem 1.5rem 2rem; box-shadow: -10px 0 40px rgba(15,31,61,0.15); transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.4,0,0.2,1); z-index: 205; }
+      body.menu-open .nav-right { transform: translateX(0); }
+      .nav-links { flex-direction: column; align-items: stretch; gap: 0.3rem; width: 100%; }
+      .nav-link { font-size: 1.05rem; padding: 0.9rem 1rem; border-radius: 8px; }
+      .nav-cta { margin-left: 0; margin-top: 1rem; text-align: center; padding: 0.9rem 1rem; font-size: 1rem; }
+      .nav-overlay { position: fixed; inset: 0; background: rgba(15,31,61,0.4); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 204; }
+      body.menu-open .nav-overlay { opacity: 1; pointer-events: auto; }
+    }
+    .nav-spacer { height: 62px; flex: 0 0 auto; }
+
+    main { flex: 1 0 auto; }
+
+    /* HERO */
+    .tool-hero { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 1rem; text-align: center; }
+    .tool-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(29, 78, 216, 0.08); border: 1px solid rgba(29, 78, 216, 0.2);
+      color: var(--blue); padding: 0.35rem 1rem; border-radius: 100px;
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.4rem;
+    }
+    .tool-tag::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+    .tool-hero h1 {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.12; letter-spacing: -0.02em; color: var(--navy); margin-bottom: 1.1rem;
+    }
+    .tool-hero h1 em { font-style: italic; color: var(--blue); }
+    .tool-hero p { font-size: 1.12rem; color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+    /* CALCULATOR CARD */
+    .calc-wrap { max-width: 820px; margin: 2rem auto 0; padding: 0 1.5rem; }
+    .calc-card {
+      background: white; border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; box-shadow: 0 10px 40px rgba(15,31,61,0.06);
+    }
+    .calc-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+
+    .field label { display: block; font-weight: 600; color: var(--navy); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .field .hint { font-weight: 400; color: var(--muted); font-size: 0.82rem; }
+    .field-input { position: relative; display: flex; align-items: center; }
+    .field-input .prefix, .field-input .suffix {
+      position: absolute; color: var(--muted); font-size: 1rem; pointer-events: none;
+    }
+    .field-input .prefix { left: 1rem; }
+    .field-input .suffix { right: 1rem; font-size: 0.85rem; }
+    .field input[type="number"] {
+      width: 100%; padding: 0.85rem 1rem; font-size: 1.1rem; font-family: 'DM Sans', sans-serif;
+      border: 1.5px solid var(--border); border-radius: 10px; color: var(--navy); background: var(--cream);
+      transition: border-color 0.15s, background 0.15s; font-weight: 600;
+    }
+    .field input[type="number"].has-prefix { padding-left: 2rem; }
+    .field input[type="number"]:focus { outline: none; border-color: var(--blue); background: white; }
+
+    /* slider rows */
+    .slider-row input[type="range"] {
+      width: 100%; margin-top: 0.7rem; accent-color: var(--blue); height: 6px;
+    }
+    .slider-val { font-family: 'Instrument Serif', serif; font-size: 1.4rem; color: var(--blue); }
+
+    /* RESULT PANEL */
+    .result {
+      margin-top: 1.6rem; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 16px; padding: 2rem; text-align: center; color: white;
+    }
+    .result .result-label { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.6rem; }
+    .result .result-num {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 9vw, 4.5rem);
+      line-height: 1; color: var(--blue-light); margin-bottom: 0.4rem; letter-spacing: -0.01em;
+    }
+    .result .result-sub { font-size: 0.98rem; color: rgba(255,255,255,0.75); }
+    .result-breakdown {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-top: 1.6rem;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.4rem;
+    }
+    .rb-item .rb-num { font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: white; line-height: 1; }
+    .rb-item .rb-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 0.3rem; }
+    @media (max-width: 520px) {
+      .result-breakdown { grid-template-columns: 1fr; gap: 0.6rem; }
+      .rb-item { display: flex; justify-content: space-between; align-items: baseline; }
+      .rb-item .rb-lbl { margin-top: 0; }
+    }
+
+    .result-cta {
+      display: inline-block; margin-top: 1.6rem; background: white; color: var(--navy);
+      padding: 0.85rem 1.9rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .result-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+    .calc-note { font-size: 0.82rem; color: var(--muted); text-align: center; margin-top: 1rem; font-style: italic; }
+
+    /* CONTENT BELOW (for SEO depth) */
+    .tool-content { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem 1rem; }
+    .tool-content h2 { font-family: 'Instrument Serif', serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--navy); margin: 2rem 0 1rem; line-height: 1.2; }
+    .tool-content p { font-size: 1.05rem; color: #2a2a3e; margin-bottom: 1.3rem; }
+    .tool-content a:not(.btn) { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+    .tool-content strong { color: var(--navy); font-weight: 600; }
+    .faq-q { font-weight: 600; color: var(--navy); margin: 1.6rem 0 0.4rem; font-size: 1.05rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 2.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.2rem; flex: 0 0 auto; margin-top: 3rem; }
+    .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--blue-light); }
+    .footer-links { display: flex; gap: 1.3rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-info { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: right; }
+    @media (max-width: 700px) { footer { flex-direction: column; text-align: center; } .footer-info { text-align: center; } .footer-links { justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" onclick="closeMenu()"></div>
+  <nav>
+    <a href="/" class="nav-logo">Build<span>WithNY</span></a>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/audit" class="nav-link">Free Audit</a>
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/about" class="nav-link">About</a>
+      </div>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" class="nav-cta">Book a Call</a>
+    </div>
+  </nav>
+  <div class="nav-spacer"></div>
+
+  <main>
+    <section class="tool-hero">
+      <div class="tool-tag">Free Tool</div>
+      <h1>What does chasing documents <em>actually</em> cost your firm?</h1>
+      <p>Enter three numbers. See your firm's specific annual cost of manual document follow-up — the calls, the reminder emails, the "just checking in" that eats your team's week.</p>
+    </section>
+
+    <div class="calc-wrap">
+      <div class="calc-card">
+        <div class="calc-grid">
+
+          <div class="field">
+            <label for="clients">Active recurring clients <span class="hint">— clients you collect documents from regularly</span></label>
+            <div class="field-input">
+              <input type="number" id="clients" class="" min="1" max="2000" value="120" oninput="recalc()" />
+              <span class="suffix">clients</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="rate">Blended hourly rate of whoever chases <span class="hint">— partner, manager, or senior staff doing the follow-up</span></label>
+            <div class="field-input">
+              <span class="prefix">$</span>
+              <input type="number" id="rate" class="has-prefix" min="10" max="1000" value="120" oninput="recalc()" />
+              <span class="suffix">/ hour</span>
+            </div>
+          </div>
+
+          <div class="field slider-row">
+            <label for="hours">Hours per week spent chasing documents — <span class="slider-val" id="hoursVal">8</span> hrs</label>
+            <input type="range" id="hours" min="1" max="30" value="8" oninput="recalc()" />
+          </div>
+
+          <div class="field slider-row">
+            <label for="weeks">Active weeks per year — <span class="slider-val" id="weeksVal">40</span> weeks</label>
+            <input type="range" id="weeks" min="10" max="52" value="40" oninput="recalc()" />
+          </div>
+
+        </div>
+
+        <div class="result">
+          <div class="result-label">Your estimated annual cost of chasing documents</div>
+          <div class="result-num" id="annualCost">$38,400</div>
+          <div class="result-sub" id="resultSub">That's labor alone — before counting delayed work and lost billable capacity.</div>
+
+          <div class="result-breakdown">
+            <div class="rb-item"><div class="rb-num" id="weeklyCost">$960</div><div class="rb-lbl">per week</div></div>
+            <div class="rb-item"><div class="rb-num" id="annualHours">320</div><div class="rb-lbl">hours / year</div></div>
+            <div class="rb-item"><div class="rb-num" id="perClient">$320</div><div class="rb-lbl">per client / year</div></div>
+          </div>
+
+          <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" rel="noopener" class="result-cta">See how much of this is automatable →</a>
+        </div>
+
+        <p class="calc-note">Nothing is stored or sent. This runs entirely in your browser.</p>
+      </div>
+    </div>
+
+    <div class="tool-content">
+      <h2>How this calculator works</h2>
+      <p>The math is deliberately simple and conservative. It takes the hours your team spends each week chasing client documents, multiplies by the hourly rate of whoever does that chasing, and annualizes it across your active weeks per year:</p>
+      <p><strong>Hours per week × hourly rate × active weeks = annual cost.</strong></p>
+      <p>It only counts <strong>direct labor</strong> — the time spent sending reminders, making calls, and tracking who still owes what. It deliberately leaves out the harder-to-measure costs: work that can't start until documents arrive, overtime in the compressed weeks before a deadline, and the billable capacity lost when your most expensive people are doing follow-up instead of client work. In other words, the real number is almost always higher than what you see above.</p>
+
+      <h2>Why the cost is usually higher than firms expect</h2>
+      <p>Most firms only ever see a fraction of this cost, because the direct follow-up time is the only part that shows up anywhere. The rest is hidden. When a 12-person firm runs the numbers honestly, the document chase often turns out to be one of the most expensive recurring activities in the practice — and one of the least visible, because it's spread across everyone's week in 10-minute chunks.</p>
+      <p>It's also the part of the job nobody wants. Chasing clients for the third time is nobody's idea of high-value work, yet it routinely falls on partners and senior staff — the people whose time is worth the most.</p>
+
+      <h2>Can this be automated?</h2>
+      <p>Most of it, yes. The reason firms still chase manually isn't that their tools are bad — it's that their tools can't see each other. The portal doesn't know what's in QuickBooks; QuickBooks doesn't know what's in the portal; neither knows what the client said in last week's email. A connective layer that reads status across the tools a firm already runs can send personalized reminders, pause them automatically the moment documents arrive, escalate only when needed, and hand a complete history to staff when a human does need to step in. I wrote a full breakdown of how that works in <a href="/blog/document-collection-automation">this article on document collection automation</a>.</p>
+
+      <h2>Common questions</h2>
+      <div class="faq-q">Is this calculator accurate for my firm?</div>
+      <p>It's an estimate, and a conservative one. The inputs are yours, so the output reflects your firm — but it only counts direct labor, so treat the result as a floor, not a ceiling. The real cost, including delayed work and lost capacity, is typically higher.</p>
+
+      <div class="faq-q">What counts as "chasing documents"?</div>
+      <p>Any time spent getting documents you need <em>out of</em> clients: reminder emails, follow-up calls, tracking who's submitted what, re-requesting things sent in the wrong format, and the mental overhead of remembering who still owes you. If a person on your team does it, it counts.</p>
+
+      <div class="faq-q">What would it cost to fix this?</div>
+      <p>Less than most firms expect, and it's a one-time build rather than an ongoing subscription. The honest way to find out for your specific stack is a short call — <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank" rel="noopener">book a free 30-minute audit</a> and I'll map your tools and tell you what's automatable, whether or not you work with me.</p>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/" class="footer-logo">Build<span>WithNY</span></a>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/audit">Free Audit</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="https://calendly.com/admin-gobuildwithny/30min" target="_blank">Book a Call</a>
+    </div>
+    <div class="footer-info">
+      <div>PandaLabs LLC — Registered in the United States</div>
+      <div>admin@gobuildwithny.com &nbsp;|&nbsp; &copy; 2026 BuildWithNY</div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.body.classList.toggle('menu-open'); }
+    function closeMenu(){ document.body.classList.remove('menu-open'); }
+    document.querySelectorAll('.nav-links a, .nav-cta').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var href = a.getAttribute('href');
+        var newTab = a.getAttribute('target') === '_blank';
+        document.body.classList.remove('menu-open');
+        if (href && !newTab && !href.startsWith('#')) { e.preventDefault(); window.location.href = href; }
+      });
+    });
+
+    function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+    function fmtNum(n){ return Math.round(n).toLocaleString('en-US'); }
+
+    function recalc(){
+      var clients = Math.max(1, parseFloat(document.getElementById('clients').value) || 0);
+      var rate    = Math.max(0, parseFloat(document.getElementById('rate').value) || 0);
+      var hours   = parseFloat(document.getElementById('hours').value) || 0;
+      var weeks   = parseFloat(document.getElementById('weeks').value) || 0;
+
+      document.getElementById('hoursVal').textContent = hours;
+      document.getElementById('weeksVal').textContent = weeks;
+
+      var weeklyCost = hours * rate;
+      var annualCost = weeklyCost * weeks;
+      var annualHours = hours * weeks;
+      var perClient = clients > 0 ? annualCost / clients : 0;
+
+      document.getElementById('annualCost').textContent = fmt(annualCost);
+      document.getElementById('weeklyCost').textContent = fmt(weeklyCost);
+      document.getElementById('annualHours').textContent = fmtNum(annualHours);
+      document.getElementById('perClient').textContent = fmt(perClient);
+
+      var sub = document.getElementById('resultSub');
+      if (annualCost >= 50000) {
+        sub.textContent = "That's a full salary's worth of time — spent on follow-up, before counting delayed work.";
+      } else if (annualCost >= 20000) {
+        sub.textContent = "That's labor alone — before counting delayed work and lost billable capacity.";
+      } else {
+        sub.textContent = "And that's just direct labor — the real cost is typically higher.";
+      }
+    }
+    recalc();
+  </script>
+
+</body>
+</html>
