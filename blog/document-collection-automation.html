@@ -44,8 +44,42 @@
       "logo": { "@type": "ImageObject", "url": "https://buildwithny.com/favicon-32.png" }
     },
     "datePublished": "2026-06-11",
-    "dateModified": "2026-06-11",
+    "dateModified": "2026-06-15",
     "mainEntityOfPage": "https://buildwithny.com/blog/document-collection-automation"
+  }
+  </script>
+
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does automated follow-up feel impersonal to long-standing clients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Done well it's the opposite. A message that names the client, references their specific engagement, and lists exactly what's still missing reads as more attentive than a generic please-send-your-documents email a junior staffer fired off between calls. The quality of personalization is what matters, not whether a human pressed send."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to replace TaxDome, Karbon, or Canopy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The connective layer sits on top of what you already run and reads their status through their APIs. Your portal stays your portal and your team keeps the tools they know."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is document chasing automation realistic for a smaller firm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The math gets stronger as the firm gets smaller, because the document chasing usually falls on the partner, the most expensive person in the building. Automating the most painful, least valuable part of their week is where the return shows up fastest."
+        }
+      }
+    ]
   }
   </script>
 
@@ -378,6 +412,17 @@
       .ba-grid { grid-template-columns: 1fr; }
     }
 
+    /* video embed */
+    .video-embed {
+      margin: 2.4rem 0;
+    }
+    .video-embed .video-caption {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 0.9rem;
+      line-height: 1.6;
+    }
+
     /* key takeaways box */
     .takeaways {
       background: white;
@@ -582,14 +627,8 @@
       <h3>1. It fires on a calendar, not on reality.</h3>
       <p>Native reminders go out on a fixed schedule regardless of what's actually happened. A client who uploaded everything on day 3 can keep receiving "you still owe us documents" emails through day 21, because the reminder sequence isn't truly synced to portal status in real time. Nothing damages a client relationship faster than nagging someone for work they already did.</p>
 
-      <h3>2. It only speaks one channel.</h3>
-      <p>Native automation is email-only. And email is a leaky channel for time-sensitive requests — commercial and promotional email open rates sit in the 20–32% range, and a big share never even reaches the primary inbox. SMS, by contrast, is opened around 98% of the time, usually within minutes. Fewer than 15% of firms use SMS for collection. That's not a small optimization — it's the difference between reaching most of your clients and reaching a third of them.</p>
-
-      <div class="stat-callout">
-        <span class="stat-num">~98% vs ~25%</span>
-        <span class="stat-text">SMS open rate versus typical email open rate. If your document reminders go out by email only, you're systematically missing the majority of clients on every single touch.</span>
-        <div class="stat-source">Sources: multiple 2026 channel benchmarks (Infobip, Kixie, MailerLite)</div>
-      </div>
+      <h3>2. It fires the same message to everyone.</h3>
+      <p>Native reminders are generic and don't adapt to how <em>this</em> client actually behaves — same template, same cadence, whether they always pay on time or always need three nudges. And they lean on a single channel: email, which is leaky for time-sensitive requests, with a large share never reaching the primary inbox. A connective layer can vary the message by client and, where it genuinely helps, add a second channel like SMS alongside the email. The point isn't one magic channel — it's that the follow-up adapts to reality instead of firing the same blast at everyone.</p>
 
       <h3>3. It can't see your other tools.</h3>
       <p>This is the real one. Your portal doesn't know that QuickBooks shows the bookkeeping is three weeks behind because the bank feed is missing a statement. QuickBooks doesn't know the TaxDome organizer is half-finished. Karbon doesn't know which client replied to your email thread saying "sending it Monday." Each tool holds one piece of the picture, and <strong>no single tool can act on the whole picture</strong> — so a human has to stitch it together by hand. Every month. That human stitching <em>is</em> the document chase.</p>
@@ -619,7 +658,7 @@
             <li>Day 0 email lists the exact documents <em>this</em> client needs by engagement type</li>
             <li>Portal status watched in real time → reminders stop the moment docs arrive</li>
             <li>Partial submission → next message names only what's still missing</li>
-            <li>Still silent → SMS fires (≈98% open) alongside the email</li>
+            <li>Still silent → escalates to a named staff member, with an optional SMS nudge alongside the email</li>
             <li>Final stage routes to a named staff member with full history attached</li>
             <li>Partner sees a status dashboard, not a stream of interruptions</li>
           </ul>
@@ -628,7 +667,14 @@
 
       <p>Notice what didn't change: the firm didn't rip out TaxDome, didn't replace Karbon, didn't ask clients to learn a new portal. The portal stays the portal. QuickBooks stays QuickBooks. The custom layer just reads what they already know and orchestrates the right action between them — the work a staff member used to do by hand.</p>
 
-      <p>This is also why the problem is solvable without a giant platform migration. Properly built systems routinely cut average document collection time from roughly 18 days down to about 7 — not because the software is magic, but because the follow-up finally happens consistently, through the right channel, and stops the instant it should.</p>
+      <div class="video-embed">
+        <div style="position: relative; padding-bottom: 62.5%; height: 0;">
+          <iframe src="https://www.loom.com/embed/a979662106504f67b654903354aa8c8a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"></iframe>
+        </div>
+        <p class="video-caption">Watch a working version run end to end — it reads the client list, chases only the genuinely overdue clients, escalates the ones who go quiet, and logs every action. Captions available.</p>
+      </div>
+
+      <p>This is also why the problem is solvable without a giant platform migration. Properly built systems routinely cut average document collection time from roughly 18 days down to about 7 — not because the software is magic, but because the follow-up finally happens consistently, adapts to who's actually responded, and stops the instant it should.</p>
 
       <h2>The honest comparison: build vs. another subscription</h2>
 
